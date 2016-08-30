@@ -95,3 +95,7 @@ C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Co
 C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_R_lower.xnb
 C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_R_upper.xnb
 C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_body.xnb
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\scoreFont.xnb
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card1.xnb
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card2.xnb
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card3.xnb

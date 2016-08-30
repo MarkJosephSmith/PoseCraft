@@ -21,9 +21,10 @@ namespace ArmStrong
 
         private KeyboardState oldState;
 
+        int score = 10;
 
         bool flex = false;
-
+       
 
         // Rotation angles
         float shoulder_R_rotation = 0f;
@@ -43,18 +44,23 @@ namespace ArmStrong
         private Texture2D flex_arm_R_upper;
         private Texture2D flex_arm_R_lower;
 
+        private Texture2D card3;
+
 
         //Declare Sprite Vectors
-        private Vector2 main_body_position = new Vector2(200,100);
-        private Vector2 shoulder_L_body_pos = new Vector2(108,91);
+        private Vector2 main_body_position = new Vector2(150,10);
+        private Vector2 shoulder_L_body_pos = new Vector2(174,194);
         private Vector2 shoulder_L_upper_arm_pos = new Vector2(64,52);
-        private Vector2 shoulder_R_body_pos = new Vector2(165, 88);
+        private Vector2 shoulder_R_body_pos = new Vector2(226, 191);
         private Vector2 shoulder_R_upper_arm_pos = new Vector2(28, 53);
+        private Vector2 score_position = new Vector2(700, 10);
+        private Vector2 elbow_L_upper_arm_pos = new Vector2(25, 36);
+        private Vector2 elbow_L_lower_arm_pos = new Vector2(40,86);
+
+        private Vector2 elbow_adjustment = new Vector2();
 
 
-        //adjusted elbow vectors
-        private Vector2 pin_L_elbow = new Vector2();
-        private Vector2 pin_R_elbow = new Vector2();
+        private SpriteFont scoreFont;
 
 
         public ArmStrong()
@@ -87,6 +93,8 @@ namespace ArmStrong
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            scoreFont = Content.Load<SpriteFont>("scoreFont");
+
             // RELAXED BODY
             relax_body = Content.Load<Texture2D>("Wrestler Paperdoll/relax_body");
             relax_arm_L_upper = Content.Load<Texture2D>("Wrestler Paperdoll/relax_arm_L_upper");
@@ -100,6 +108,9 @@ namespace ArmStrong
             flex_arm_R_upper = Content.Load<Texture2D>("Wrestler Paperdoll/flex_arm_R_upper");
             flex_arm_L_lower = Content.Load<Texture2D>("Wrestler Paperdoll/flex_arm_L_lower");
             flex_arm_R_lower = Content.Load<Texture2D>("Wrestler Paperdoll/flex_arm_R_lower");
+
+            //CARDS
+            card3 = Content.Load<Texture2D>("Cards/card3");
         }
 
         /// <summary>
@@ -128,6 +139,8 @@ namespace ArmStrong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+
+            Find_L_Elbow();
 
             KeyboardState newState = Keyboard.GetState();  // get the newest state
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -172,13 +185,17 @@ namespace ArmStrong
 
             spriteBatch.Begin();
 
+            spriteBatch.DrawString(scoreFont,score.ToString(),score_position,Color.Yellow);
+
+            spriteBatch.Draw(card3, main_body_position, Color.White);
+
             if (flex == false)
             {
                 spriteBatch.Draw(relax_arm_R_upper, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
                 spriteBatch.Draw(relax_arm_R_lower, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
                 spriteBatch.Draw(relax_body, main_body_position, Color.White);
                 spriteBatch.Draw(relax_arm_L_upper, main_body_position+shoulder_L_body_pos,null,Color.White, shoulder_L_rotation, shoulder_L_upper_arm_pos,1, SpriteEffects.None,0);
-
+                spriteBatch.Draw(relax_arm_L_lower, main_body_position + shoulder_L_body_pos - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), null, Color.White, 0, elbow_L_lower_arm_pos + elbow_adjustment - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), 1, SpriteEffects.None, 0);
             }
             else
             {
@@ -191,9 +208,6 @@ namespace ArmStrong
 
 
 
-            pin_L_elbow = Find_L_Elbow();
-            spriteBatch.Draw(relax_arm_L_lower, pin_L_elbow, null, Color.White, shoulder_L_rotation, shoulder_L_upper_arm_pos, 1, SpriteEffects.None, 0);
-
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -203,23 +217,10 @@ namespace ArmStrong
         /*  
          *
          */
-        public Vector2 Find_L_Elbow()
+        public void Find_L_Elbow()
         {
-
-            /*starting shoulder pin point 308,191
-             * starting elbow pin 264,152
-             * drop a tangent and make a right triangle at 264,191
-             * starting angle of arm is 41.55 degrees or .725 radians
-             * distance is 58.80
-             */
-
-            //elbow pin will be located at (shoulder pin - (58.8*(cos(shoulder rotation + 0.725))))
-            Vector2 ePin = new Vector2(308, 191);
-            Vector2 adjustment = new Vector2( (float)(58.8 * (Math.Cos(0.725 + shoulder_L_rotation))), (float)(58.8 * (Math.Sin(0.725 + shoulder_L_rotation))));
-
-            ePin = ePin - adjustment;
-
-            return ePin;
+            elbow_adjustment = new Vector2((float)(42.15 * (Math.Cos(0.389 + shoulder_L_rotation))), (float)(42.15 * (Math.Sin(0.389 + shoulder_L_rotation))));
+            
         }
 
         public Vector2 Find_R_Elbow()
