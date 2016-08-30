@@ -10,6 +10,11 @@ namespace ArmStrong
 
     public class ArmStrong : Game
     {
+
+
+        //a comment
+
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
