@@ -4,9 +4,9 @@
 
 Body {
 
-to left arm: 108, 91
+to left arm: 173, 183
 
-to right arm: 165, 88
+to right arm: 228, 181
 
 }
 
