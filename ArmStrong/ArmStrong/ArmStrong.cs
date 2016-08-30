@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace ArmStrong
 {
@@ -13,7 +14,7 @@ namespace ArmStrong
 
 
         //a comment
-
+        
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -50,10 +51,15 @@ namespace ArmStrong
         private Vector2 shoulder_R_body_pos = new Vector2(165, 88);
         private Vector2 shoulder_R_upper_arm_pos = new Vector2(28, 53);
 
+
+        //adjusted elbow vectors
+        private Vector2 pin_L_elbow = new Vector2();
+        private Vector2 pin_R_elbow = new Vector2();
+
+
         public ArmStrong()
         {
 
-            //fuck mark's comment
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             
@@ -184,15 +190,36 @@ namespace ArmStrong
 
 
 
+
+            pin_L_elbow = Find_L_Elbow();
+            spriteBatch.Draw(relax_arm_L_lower, pin_L_elbow, null, Color.White, shoulder_L_rotation, shoulder_L_upper_arm_pos, 1, SpriteEffects.None, 0);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
+
+        /*  
+         *
+         */
         public Vector2 Find_L_Elbow()
         {
 
-            return Vector2.Zero;
+            /*starting shoulder pin point 308,191
+             * starting elbow pin 264,152
+             * drop a tangent and make a right triangle at 264,191
+             * starting angle of arm is 41.55 degrees or .725 radians
+             * distance is 58.80
+             */
+
+            //elbow pin will be located at (shoulder pin - (58.8*(cos(shoulder rotation + 0.725))))
+            Vector2 ePin = new Vector2(308, 191);
+            Vector2 adjustment = new Vector2( (float)(58.8 * (Math.Cos(0.725 + shoulder_L_rotation))), (float)(58.8 * (Math.Sin(0.725 + shoulder_L_rotation))));
+
+            ePin = ePin - adjustment;
+
+            return ePin;
         }
 
         public Vector2 Find_R_Elbow()
