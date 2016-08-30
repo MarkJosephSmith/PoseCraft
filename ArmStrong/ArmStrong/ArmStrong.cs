@@ -18,6 +18,13 @@ namespace ArmStrong
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        private KeyboardState oldState;
+
+
+        bool flex = false;
+
+
+        // Rotation angles
         float shoulder_R_rotation = 0f;
         float shoulder_L_rotation = 0f;
         float Pi = 3.14159f;
@@ -29,6 +36,12 @@ namespace ArmStrong
         private Texture2D relax_arm_L_lower;
         private Texture2D relax_arm_R_upper;
         private Texture2D relax_arm_R_lower;
+        private Texture2D flex_body;
+        private Texture2D flex_arm_L_upper;
+        private Texture2D flex_arm_L_lower;
+        private Texture2D flex_arm_R_upper;
+        private Texture2D flex_arm_R_lower;
+
 
         //Declare Sprite Vectors
         private Vector2 main_body_position = new Vector2(200,100);
@@ -68,12 +81,19 @@ namespace ArmStrong
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            // RELAXED BODY
             relax_body = Content.Load<Texture2D>("Wrestler Paperdoll/relax_body");
             relax_arm_L_upper = Content.Load<Texture2D>("Wrestler Paperdoll/relax_arm_L_upper");
             relax_arm_R_upper = Content.Load<Texture2D>("Wrestler Paperdoll/relax_arm_R_upper");
             relax_arm_L_lower = Content.Load<Texture2D>("Wrestler Paperdoll/relax_arm_L_lower");
             relax_arm_R_lower = Content.Load<Texture2D>("Wrestler Paperdoll/relax_arm_R_lower");
+
+            //FLEX BODY
+            flex_body = Content.Load<Texture2D>("Wrestler Paperdoll/flex_body");
+            flex_arm_L_upper = Content.Load<Texture2D>("Wrestler Paperdoll/flex_arm_L_upper");
+            flex_arm_R_upper = Content.Load<Texture2D>("Wrestler Paperdoll/flex_arm_R_upper");
+            flex_arm_L_lower = Content.Load<Texture2D>("Wrestler Paperdoll/flex_arm_L_lower");
+            flex_arm_R_lower = Content.Load<Texture2D>("Wrestler Paperdoll/flex_arm_R_lower");
         }
 
         /// <summary>
@@ -86,6 +106,13 @@ namespace ArmStrong
             relax_body.Dispose();
             relax_arm_L_upper.Dispose();
             relax_arm_R_upper.Dispose();
+            relax_arm_L_lower.Dispose();
+            relax_arm_R_lower.Dispose();
+            flex_body.Dispose();
+            flex_arm_L_upper.Dispose();
+            flex_arm_R_upper.Dispose();
+            flex_arm_L_lower.Dispose();
+            flex_arm_R_lower.Dispose();
         }
 
         /// <summary>
@@ -96,6 +123,7 @@ namespace ArmStrong
         protected override void Update(GameTime gameTime)
         {
 
+            KeyboardState newState = Keyboard.GetState();  // get the newest state
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -116,6 +144,14 @@ namespace ArmStrong
             {
                 shoulder_R_rotation = shoulder_R_rotation - rotation_speed;
             }
+            if (oldState.IsKeyUp(Keys.Space) && newState.IsKeyDown(Keys.Space))
+            {
+                flex = true;
+            }
+            if (oldState.IsKeyUp(Keys.R) && newState.IsKeyDown(Keys.R))
+            {
+                flex = false;
+            }
 
             base.Update(gameTime);
         }
@@ -130,10 +166,23 @@ namespace ArmStrong
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(relax_arm_R_upper, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
-            spriteBatch.Draw(relax_arm_R_lower, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
-            spriteBatch.Draw(relax_body, main_body_position, Color.White);
-            spriteBatch.Draw(relax_arm_L_upper, main_body_position+shoulder_L_body_pos,null,Color.White, shoulder_L_rotation, shoulder_L_upper_arm_pos,1, SpriteEffects.None,0);
+            if (flex == false)
+            {
+                spriteBatch.Draw(relax_arm_R_upper, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(relax_arm_R_lower, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(relax_body, main_body_position, Color.White);
+                spriteBatch.Draw(relax_arm_L_upper, main_body_position+shoulder_L_body_pos,null,Color.White, shoulder_L_rotation, shoulder_L_upper_arm_pos,1, SpriteEffects.None,0);
+
+            }
+            else
+            {
+                spriteBatch.Draw(flex_arm_R_upper, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
+                //spriteBatch.Draw(flex_arm_R_lower, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(flex_body, main_body_position, Color.White);
+                spriteBatch.Draw(flex_arm_L_upper, main_body_position + shoulder_L_body_pos, null, Color.White, shoulder_L_rotation, shoulder_L_upper_arm_pos, 1, SpriteEffects.None, 0);
+            }
+
+
 
             spriteBatch.End();
 

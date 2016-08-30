@@ -4,10 +4,15 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/u0164776/Documents/Mark's School Files/Semester 1/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_body.png</File>
-    <File>C:/Users/u0164776/Documents/Mark's School Files/Semester 1/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_L_upper.png</File>
-    <File>C:/Users/u0164776/Documents/Mark's School Files/Semester 1/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_L_lower.png</File>
-    <File>C:/Users/u0164776/Documents/Mark's School Files/Semester 1/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_R_lower.png</File>
-    <File>C:/Users/u0164776/Documents/Mark's School Files/Semester 1/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_R_upper.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_body.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_L_upper.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_L_lower.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_R_lower.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_R_upper.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_arm_L_lower.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_arm_L_upper.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_arm_R_lower.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_arm_R_upper.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_body.png</File>
   </SourceFiles>
 </SourceFileCollection>
