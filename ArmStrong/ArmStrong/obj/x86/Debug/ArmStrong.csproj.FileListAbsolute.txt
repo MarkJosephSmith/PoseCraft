@@ -60,3 +60,5 @@ C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\A
 C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.RawInput.xml
 C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\obj\x86\Debug\ArmStrong.csprojResolveAssemblyReference.cache
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\obj\x86\Debug\ArmStrong.exe
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\obj\x86\Debug\ArmStrong.pdb

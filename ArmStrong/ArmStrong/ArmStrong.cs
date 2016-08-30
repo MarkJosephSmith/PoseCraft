@@ -34,6 +34,8 @@ namespace ArmStrong
 
         public ArmStrong()
         {
+
+            //fuck mark's comment
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             
