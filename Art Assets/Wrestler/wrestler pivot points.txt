@@ -2,7 +2,6 @@
 
 -Connection : X, Y-
 
-
 Body {
 
 to left arm: 108, 91
@@ -27,9 +26,17 @@ to lower arm: 67, 29
 
 }
 
+Left Lower Arm {
+
+to upper arm: 40, 86
+
 }
 
+Right Lower Arm {
 
+to upper arm: 17, 72
+
+}
 
 
 }
