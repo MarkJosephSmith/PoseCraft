@@ -140,5 +140,17 @@ namespace ArmStrong
             base.Draw(gameTime);
         }
 
+        public Vector2 Find_L_Elbow()
+        {
+
+            return Vector2.Zero;
+        }
+
+        public Vector2 Find_R_Elbow()
+        {
+
+            return Vector2.Zero;
+        }
+
     }
 }
