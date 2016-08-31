@@ -138,3 +138,12 @@ N:\Grad School\02 Fall 16\EAE 6100\fixgit0830\New folder (2)\PoseCraft\ArmStrong
 N:\Grad School\02 Fall 16\EAE 6100\fixgit0830\New folder (2)\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.RawInput.xml
 N:\Grad School\02 Fall 16\EAE 6100\fixgit0830\New folder (2)\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 N:\Grad School\02 Fall 16\EAE 6100\fixgit0830\New folder (2)\PoseCraft\ArmStrong\ArmStrong\obj\x86\Debug\ArmStrong.csprojResolveAssemblyReference.cache
+C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\scoreFont.xnb
+C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card1.xnb
+C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card2.xnb
+C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card3.xnb
+C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_L_lower.xnb
+C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_L_upper.xnb
+C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_R_lower.xnb
+C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_R_upper.xnb
+C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_body.xnb

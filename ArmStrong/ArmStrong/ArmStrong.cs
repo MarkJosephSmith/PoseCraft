@@ -150,10 +150,12 @@ namespace ArmStrong
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 shoulder_L_rotation = shoulder_L_rotation + rotation_speed;
+                
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
                 shoulder_L_rotation = shoulder_L_rotation - rotation_speed;
+                
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
@@ -185,7 +187,23 @@ namespace ArmStrong
 
             spriteBatch.Begin();
 
-            spriteBatch.DrawString(scoreFont,score.ToString(),score_position,Color.Yellow);
+            //spriteBatch.DrawString(scoreFont,score.ToString(),score_position,Color.Yellow);
+            spriteBatch.DrawString(scoreFont, shoulder_L_rotation.ToString(), score_position, Color.Red); //view angle as we rotate
+
+            //get the cos to give a "distance from" the angle.  1.0 means you're there.  Use this for a points multiplier
+            float angle_multiplier = (float)Math.Cos(shoulder_L_rotation);
+
+            //no need for negative points.
+            if ( angle_multiplier < 0 ) 
+            {
+                angle_multiplier = 0;
+            }
+
+
+            //display the points
+            spriteBatch.DrawString(scoreFont, angle_multiplier.ToString(), score_position + new Vector2(0, 40), Color.Red); 
+
+            
 
             spriteBatch.Draw(card3, main_body_position, Color.White);
 
@@ -229,6 +247,36 @@ namespace ArmStrong
             //github fix test.
 
             return Vector2.Zero;
+        }
+
+
+
+        /*Class for a posecard
+         */
+        protected class Pose_Card
+        {
+            //correct posses for full points from the card
+            float angle_L_upper;
+            float angle_R_upper;
+            float angle_L_lower;
+            float angle_R_lower;
+
+            //sprite
+            Texture2D card_art;
+
+
+
+            /*4 floats, each an angle in radians that indicates the correct arm position
+             *1 texture for the sprite image 
+             */
+
+            Pose_Card(float upperL, float upperR, float lowerL, float lowerR, Texture2D art)
+            {
+                
+
+
+            }
+
         }
 
     }
