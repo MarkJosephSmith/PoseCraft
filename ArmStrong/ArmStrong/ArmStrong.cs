@@ -24,6 +24,7 @@ namespace ArmStrong
         //Random Variables
         Random rnd_L = new Random();
         Random rnd_R = new Random();
+        Random rnd_tired = new Random();
 
         float score_total = 0;
         float score_round = 0;
@@ -32,8 +33,9 @@ namespace ArmStrong
         bool flex = false;
         int level = 1;
         int stage = 1;
-        float durability;
-        float durability_rate = 0.01f;
+
+        float tiredness;
+        float tiredness_rate = 0.01f;
 
         // Rotation angles
         float shoulder_R_rotation = 0f;
@@ -45,7 +47,7 @@ namespace ArmStrong
 
 
         //Timer Variables
-        private int[] timer_lengths = new int[9] { 30, 20, 15, 10, 8, 6, 4, 2, 1};
+        private int timer_length = 30;
         private float remaining_time;
 
         //Declare Body Textures
@@ -105,8 +107,8 @@ namespace ArmStrong
             // TODO: Add your initialization logic here
             shoulder_L_rotation = (float) rnd_L.NextDouble() * Pi;
             shoulder_R_rotation = (float) rnd_R.NextDouble() * Pi;
-            remaining_time = timer_lengths[stage];
-            durability = 100;
+            remaining_time = timer_length;
+            tiredness = 0.01f;
             base.Initialize();
         }
 
@@ -169,39 +171,39 @@ namespace ArmStrong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            
 
             Find_Elbows();
 
             KeyboardState newState = Keyboard.GetState();  // get the newest state
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) || durability < 0)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (flex == false)
-            { 
-                if (Keyboard.GetState().IsKeyDown(Keys.Left))
-                {
-                    shoulder_L_rotation = shoulder_L_rotation + rotation_speed;
+             
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                shoulder_L_rotation = shoulder_L_rotation + rotation_speed;
 
-                }
-                if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                {
-                    shoulder_L_rotation = shoulder_L_rotation - rotation_speed;
-                }
-                if (Keyboard.GetState().IsKeyDown(Keys.A))
-                {
-                    shoulder_R_rotation = shoulder_R_rotation + rotation_speed;
-                }
-                if (Keyboard.GetState().IsKeyDown(Keys.D))
-                {
-                    shoulder_R_rotation = shoulder_R_rotation - rotation_speed;
-                }
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                {
-                    flex = true;
-
-
-                }
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            {
+                shoulder_L_rotation = shoulder_L_rotation - rotation_speed;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                shoulder_R_rotation = shoulder_R_rotation + rotation_speed;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                shoulder_R_rotation = shoulder_R_rotation - rotation_speed;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                flex = true;
+
+
+            }
+            
 
             //get the cos to give a "distance from" the angle.  1.0 means you're there.  Use this for a points multiplier
             float angle_multiplier_R = (float)Math.Cos(shoulder_R_rotation);
@@ -216,21 +218,23 @@ namespace ArmStrong
                 angle_multiplier_L = 0;
             }
 
-            
+            remaining_time -= (float) gameTime.ElapsedGameTime.TotalSeconds; //Timer
 
             //Timer
 
-            if (flex == false)
+            if (flex == true)
             {
-                remaining_time -= (float) gameTime.ElapsedGameTime.TotalSeconds; //Timer
-                score_total = score_total + (score_rate * angle_multiplier_R * angle_multiplier_L); //Score
+                tiredness = tiredness + 0.0001f;
+                score_total = score_total + (score_rate * angle_multiplier_R) + (score_rate * angle_multiplier_L); //Score
+                if(rnd_tired.NextDouble()>0.5)
+                {
+                    shoulder_L_rotation = shoulder_L_rotation - rotation_speed*tiredness;
+                }
+                else
+                {
+                    shoulder_L_rotation = shoulder_L_rotation + rotation_speed*tiredness;
+                }
             }
-            else
-            {
-                remaining_time -= (float)gameTime.ElapsedGameTime.TotalSeconds*3;
-                score_total =  score_total + (score_rate * angle_multiplier_R * angle_multiplier_L) * (1/(remaining_time+1)+1);
-                durability -= durability_rate * stage;
-            }    
 
             if(remaining_time < 0)
             {
@@ -264,7 +268,7 @@ namespace ArmStrong
             spriteBatch.DrawString(scoreFont, "Time: " +Convert.ToInt32(remaining_time).ToString(), score_position + new Vector2(0, 80), Color.Red);
 
             //display durability
-            spriteBatch.DrawString(scoreFont, "Durability: " + Convert.ToInt32(durability).ToString(), score_position + new Vector2(0, 120), Color.Red);
+            spriteBatch.DrawString(scoreFont, "Durability: " + Convert.ToInt32(tiredness).ToString(), score_position + new Vector2(0, 120), Color.Red);
 
             spriteBatch.Draw(card3, main_body_position, Color.White);
 
@@ -307,18 +311,11 @@ namespace ArmStrong
         public void Reset_Card()
         {
             level++;
-            remaining_time = timer_lengths[stage];
+            remaining_time = timer_length;
             shoulder_L_rotation = (float)rnd_L.NextDouble() * Pi;
             shoulder_R_rotation = (float)rnd_R.NextDouble() * Pi;
-            if(flex == true)
-            {
-                flex = false;
-            }
-            else
-            {
-                durability = durability - 5 * stage;
-            }
-
+            flex = false;
+           
             if (level%4 == 0)
             {
                 level = 1;

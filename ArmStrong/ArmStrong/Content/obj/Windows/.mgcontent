@@ -4,21 +4,21 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_body.png</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_L_upper.png</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_L_lower.png</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_R_lower.png</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_R_upper.png</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_arm_L_lower.png</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_arm_L_upper.png</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_arm_R_lower.png</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_arm_R_upper.png</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_body.png</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/scoreFont.spritefont</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/Cards/card1.png</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/Cards/card2.png</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/Cards/card3.png</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/bg.png</File>
-    <File>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/ring.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_body.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_L_upper.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_L_lower.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_R_lower.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/relax_arm_R_upper.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_arm_L_lower.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_arm_L_upper.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_arm_R_lower.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_arm_R_upper.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_body.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/scoreFont.spritefont</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Cards/card1.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Cards/card2.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Cards/card3.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/bg.png</File>
+    <File>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/ring.png</File>
   </SourceFiles>
 </SourceFileCollection>

@@ -188,3 +188,5 @@ D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.
 D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\obj\x86\Debug\ArmStrong.csprojResolveAssemblyReference.cache
 D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\bg.xnb
 D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\ring.xnb
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\bg.xnb
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\ring.xnb
