@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/u0164776/Documents/Mark's School Files/Semester 1/PoseCraft/ArmStrong/ArmStrong/Content/scoreFont.spritefont</SourceFile>
-  <SourceTime>2016-08-30T20:55:19.3543152-06:00</SourceTime>
-  <DestFile>C:/Users/u0164776/Documents/Mark's School Files/Semester 1/PoseCraft/ArmStrong/ArmStrong/Content/bin/Windows/scoreFont.xnb</DestFile>
-  <DestTime>2016-08-30T21:09:08.5602798-06:00</DestTime>
+  <SourceFile>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/scoreFont.spritefont</SourceFile>
+  <SourceTime>2016-08-31T21:25:41.1573951-06:00</SourceTime>
+  <DestFile>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/bin/Windows/scoreFont.xnb</DestFile>
+  <DestTime>2016-08-31T22:31:21.3366029-06:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2016-03-30T00:36:08-06:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

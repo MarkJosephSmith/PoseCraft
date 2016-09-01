@@ -147,3 +147,44 @@ C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\A
 C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_R_lower.xnb
 C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_R_upper.xnb
 C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_body.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\obj\x86\Debug\ArmStrong.exe
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\obj\x86\Debug\ArmStrong.pdb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\scoreFont.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card1.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card2.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card3.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_L_lower.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_L_upper.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_R_lower.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_R_upper.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_body.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_arm_L_lower.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_arm_L_upper.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_arm_R_lower.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_arm_R_upper.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_body.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\ArmStrong.exe
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\ArmStrong.pdb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\MonoGame.Framework.dll
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.dll
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.XInput.dll
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.RawInput.dll
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\MonoGame.Framework.xml
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.xml
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.XInput.xml
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.RawInput.xml
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\obj\x86\Debug\ArmStrong.csprojResolveAssemblyReference.cache
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\bg.xnb
+D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\ring.xnb

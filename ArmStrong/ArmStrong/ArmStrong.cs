@@ -20,11 +20,20 @@ namespace ArmStrong
         SpriteBatch spriteBatch;
 
         private KeyboardState oldState;
+        
+        //Random Variables
+        Random rnd_L = new Random();
+        Random rnd_R = new Random();
 
-        int score = 10;
+        float score_total = 0;
+        float score_round = 0;
+        float score_rate = 1f;
 
         bool flex = false;
-       
+        int level = 1;
+        int stage = 1;
+        float durability;
+        float durability_rate = 0.01f;
 
         // Rotation angles
         float shoulder_R_rotation = 0f;
@@ -32,7 +41,14 @@ namespace ArmStrong
         float Pi = 3.14159f;
         float rotation_speed = 0.1f;
 
-        //Declare Textures
+        
+
+
+        //Timer Variables
+        private int[] timer_lengths = new int[9] { 30, 20, 15, 10, 8, 6, 4, 2, 1};
+        private float remaining_time;
+
+        //Declare Body Textures
         private Texture2D relax_body;
         private Texture2D relax_arm_L_upper;
         private Texture2D relax_arm_L_lower;
@@ -44,21 +60,28 @@ namespace ArmStrong
         private Texture2D flex_arm_R_upper;
         private Texture2D flex_arm_R_lower;
 
+
+        //Declare card Textures
         private Texture2D card3;
 
+        //Background
+        private Texture2D background;
+        private Texture2D ring;
 
         //Declare Sprite Vectors
-        private Vector2 main_body_position = new Vector2(150,10);
+        private Vector2 main_body_position = new Vector2(120,10);
         private Vector2 shoulder_L_body_pos = new Vector2(174,194);
         private Vector2 shoulder_L_upper_arm_pos = new Vector2(64,52);
         private Vector2 shoulder_R_body_pos = new Vector2(226, 191);
         private Vector2 shoulder_R_upper_arm_pos = new Vector2(28, 53);
-        private Vector2 score_position = new Vector2(700, 10);
+        private Vector2 score_position = new Vector2(650, 10);
         private Vector2 elbow_L_upper_arm_pos = new Vector2(25, 36);
         private Vector2 elbow_L_lower_arm_pos = new Vector2(40,86);
+        private Vector2 elbow_R_upper_arm_pos = new Vector2(67, 29);
+        private Vector2 elbow_R_lower_arm_pos = new Vector2(17, 72);
 
-        private Vector2 elbow_adjustment = new Vector2();
-
+        private Vector2 elbow_adjustment_L = new Vector2();
+        private Vector2 elbow_adjustment_R = new Vector2();
 
         private SpriteFont scoreFont;
 
@@ -80,7 +103,10 @@ namespace ArmStrong
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            shoulder_L_rotation = (float) rnd_L.NextDouble() * Pi;
+            shoulder_R_rotation = (float) rnd_R.NextDouble() * Pi;
+            remaining_time = timer_lengths[stage];
+            durability = 100;
             base.Initialize();
         }
 
@@ -111,6 +137,10 @@ namespace ArmStrong
 
             //CARDS
             card3 = Content.Load<Texture2D>("Cards/card3");
+
+            //BACKGROUND
+            background = Content.Load<Texture2D>("bg");
+            ring = Content.Load<Texture2D>("ring");
         }
 
         /// <summary>
@@ -140,38 +170,71 @@ namespace ArmStrong
         protected override void Update(GameTime gameTime)
         {
 
-            Find_L_Elbow();
+            Find_Elbows();
 
             KeyboardState newState = Keyboard.GetState();  // get the newest state
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) || durability < 0)
                 Exit();
 
+            if (flex == false)
+            { 
+                if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                {
+                    shoulder_L_rotation = shoulder_L_rotation + rotation_speed;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                shoulder_L_rotation = shoulder_L_rotation + rotation_speed;
-                
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                {
+                    shoulder_L_rotation = shoulder_L_rotation - rotation_speed;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.A))
+                {
+                    shoulder_R_rotation = shoulder_R_rotation + rotation_speed;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    shoulder_R_rotation = shoulder_R_rotation - rotation_speed;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                    flex = true;
+
+
+                }
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+
+            //get the cos to give a "distance from" the angle.  1.0 means you're there.  Use this for a points multiplier
+            float angle_multiplier_R = (float)Math.Cos(shoulder_R_rotation);
+            float angle_multiplier_L = (float)Math.Cos(shoulder_L_rotation);
+            //no need for negative points.
+            if (angle_multiplier_R < 0)
             {
-                shoulder_L_rotation = shoulder_L_rotation - rotation_speed;
-                
+                angle_multiplier_R = 0;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            if (angle_multiplier_L < 0)
             {
-                shoulder_R_rotation = shoulder_R_rotation + rotation_speed;
+                angle_multiplier_L = 0;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
+
+            
+
+            //Timer
+
+            if (flex == false)
             {
-                shoulder_R_rotation = shoulder_R_rotation - rotation_speed;
+                remaining_time -= (float) gameTime.ElapsedGameTime.TotalSeconds; //Timer
+                score_total = score_total + (score_rate * angle_multiplier_R * angle_multiplier_L); //Score
             }
-            if (oldState.IsKeyUp(Keys.Space) && newState.IsKeyDown(Keys.Space))
+            else
             {
-                flex = true;
-            }
-            if (oldState.IsKeyUp(Keys.R) && newState.IsKeyDown(Keys.R))
+                remaining_time -= (float)gameTime.ElapsedGameTime.TotalSeconds*3;
+                score_total =  score_total + (score_rate * angle_multiplier_R * angle_multiplier_L) * (1/(remaining_time+1)+1);
+                durability -= durability_rate * stage;
+            }    
+
+            if(remaining_time < 0)
             {
-                flex = false;
+                Reset_Card();
             }
 
             base.Update(gameTime);
@@ -187,33 +250,31 @@ namespace ArmStrong
 
             spriteBatch.Begin();
 
+            spriteBatch.Draw(background, Vector2.Zero, Color.White);
+            
+
             //spriteBatch.DrawString(scoreFont,score.ToString(),score_position,Color.Yellow);
-            spriteBatch.DrawString(scoreFont, shoulder_L_rotation.ToString(), score_position, Color.Red); //view angle as we rotate
-
-            //get the cos to give a "distance from" the angle.  1.0 means you're there.  Use this for a points multiplier
-            float angle_multiplier = (float)Math.Cos(shoulder_L_rotation);
-
-            //no need for negative points.
-            if ( angle_multiplier < 0 ) 
-            {
-                angle_multiplier = 0;
-            }
+            spriteBatch.DrawString(scoreFont, "Stage: "+ stage + " Level: " + level, score_position, Color.Red); //view angle as we rotate
 
 
             //display the points
-            spriteBatch.DrawString(scoreFont, angle_multiplier.ToString(), score_position + new Vector2(0, 40), Color.Red); 
+            spriteBatch.DrawString(scoreFont, "Score: "+Convert.ToInt32(score_total).ToString(), score_position + new Vector2(0, 40), Color.Red);
 
-            
+            //display the Timer
+            spriteBatch.DrawString(scoreFont, "Time: " +Convert.ToInt32(remaining_time).ToString(), score_position + new Vector2(0, 80), Color.Red);
+
+            //display durability
+            spriteBatch.DrawString(scoreFont, "Durability: " + Convert.ToInt32(durability).ToString(), score_position + new Vector2(0, 120), Color.Red);
 
             spriteBatch.Draw(card3, main_body_position, Color.White);
 
             if (flex == false)
             {
                 spriteBatch.Draw(relax_arm_R_upper, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
-                spriteBatch.Draw(relax_arm_R_lower, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(relax_arm_R_lower, main_body_position + shoulder_R_body_pos - (shoulder_R_upper_arm_pos - elbow_R_upper_arm_pos), null, Color.White, 0, elbow_R_lower_arm_pos + elbow_adjustment_R - (shoulder_R_upper_arm_pos - elbow_R_upper_arm_pos), 1, SpriteEffects.None, 0);
                 spriteBatch.Draw(relax_body, main_body_position, Color.White);
                 spriteBatch.Draw(relax_arm_L_upper, main_body_position+shoulder_L_body_pos,null,Color.White, shoulder_L_rotation, shoulder_L_upper_arm_pos,1, SpriteEffects.None,0);
-                spriteBatch.Draw(relax_arm_L_lower, main_body_position + shoulder_L_body_pos - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), null, Color.White, 0, elbow_L_lower_arm_pos + elbow_adjustment - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(relax_arm_L_lower, main_body_position + shoulder_L_body_pos - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), null, Color.White, 0, elbow_L_lower_arm_pos + elbow_adjustment_L - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), 1, SpriteEffects.None, 0);
             }
             else
             {
@@ -224,7 +285,7 @@ namespace ArmStrong
             }
 
 
-
+            spriteBatch.Draw(ring, Vector2.Zero, Color.White);
 
             spriteBatch.End();
 
@@ -235,20 +296,36 @@ namespace ArmStrong
         /*  
          *
          */
-        public void Find_L_Elbow()
+        public void Find_Elbows()
         {
-            elbow_adjustment = new Vector2((float)(42.15 * (Math.Cos(0.389 + shoulder_L_rotation))), (float)(42.15 * (Math.Sin(0.389 + shoulder_L_rotation))));
-            
+            elbow_adjustment_L = new Vector2((float)(42.15 * (Math.Cos(0.389 + shoulder_L_rotation))), (float)(42.15 * (Math.Sin(0.389 + shoulder_L_rotation))));
+            elbow_adjustment_R = new Vector2((float)(65.94 * (Math.Cos(5.57 + shoulder_R_rotation-Pi))), (float)(65.94 * (Math.Sin(5.57 + shoulder_R_rotation-Pi))));
+
         }
 
-        public Vector2 Find_R_Elbow()
+
+        public void Reset_Card()
         {
+            level++;
+            remaining_time = timer_lengths[stage];
+            shoulder_L_rotation = (float)rnd_L.NextDouble() * Pi;
+            shoulder_R_rotation = (float)rnd_R.NextDouble() * Pi;
+            if(flex == true)
+            {
+                flex = false;
+            }
+            else
+            {
+                durability = durability - 5 * stage;
+            }
 
-            //github fix test.
+            if (level%4 == 0)
+            {
+                level = 1;
+                stage++;
+            }
 
-            return Vector2.Zero;
         }
-
 
 
         /*Class for a posecard

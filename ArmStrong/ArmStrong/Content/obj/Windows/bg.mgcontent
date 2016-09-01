@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/Wrestler Paperdoll/flex_arm_L_upper.png</SourceFile>
-  <SourceTime>2016-08-31T21:25:40.8119436-06:00</SourceTime>
-  <DestFile>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/bin/Windows/Wrestler Paperdoll/flex_arm_L_upper.xnb</DestFile>
-  <DestTime>2016-08-31T22:31:21.0653418-06:00</DestTime>
+  <SourceFile>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/bg.png</SourceFile>
+  <SourceTime>2016-08-31T21:25:42.2216353-06:00</SourceTime>
+  <DestFile>D:/Git Repositories/PoseCraft/ArmStrong/ArmStrong/Content/bin/Windows/bg.xnb</DestFile>
+  <DestTime>2016-08-31T22:31:21.5208524-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T00:36:08-06:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
