@@ -32,6 +32,16 @@ namespace ArmStrong
         float Pi = 3.14159f;
         float rotation_speed = 0.1f;
 
+        ///////////////////////////////////////////////////////////////////mark added
+        float elbow_L_rotation = 0f;
+
+
+        ulong point_total = 0; //a fuckload of points
+
+        bool calc_points = true; //should switch and reset on card load or some other event
+        ///////////////////////////////////////////////////////////////////end mark added
+
+
         //Declare Textures
         private Texture2D relax_body;
         private Texture2D relax_arm_L_upper;
@@ -157,6 +167,23 @@ namespace ArmStrong
                 shoulder_L_rotation = shoulder_L_rotation - rotation_speed;
                 
             }
+
+
+            //////////////////////////////////////////////////////////////////////////////////mark added
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                elbow_L_rotation = elbow_L_rotation + rotation_speed;
+
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                elbow_L_rotation = elbow_L_rotation - rotation_speed;
+
+            }
+            /////////////////////////////////////////////////////////////////////////////////////end mark added
+
+
+
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 shoulder_R_rotation = shoulder_R_rotation + rotation_speed;
@@ -168,10 +195,22 @@ namespace ArmStrong
             if (oldState.IsKeyUp(Keys.Space) && newState.IsKeyDown(Keys.Space))
             {
                 flex = true;
+
+
             }
             if (oldState.IsKeyUp(Keys.R) && newState.IsKeyDown(Keys.R))
             {
                 flex = false;
+
+                //////////////////////////////////////////////////////////////////////////////////mark added
+
+                //this is just for the demo
+                point_total = 0;
+                calc_points = true;
+
+                //////////////////////////////////////////////////////////////////////////////////end mark added
+
+
             }
 
             base.Update(gameTime);
@@ -200,7 +239,18 @@ namespace ArmStrong
             }
 
 
-            //display the points
+            //////////////////////////////////////////////////////////////////////////////////mark added
+
+            else if (angle_multiplier > .9)
+            {
+                angle_multiplier = angle_multiplier * 2;
+            }
+
+            //////////////////////////////////////////////////////////////////////////////////mark added
+
+
+
+            //display the multiplier for testing
             spriteBatch.DrawString(scoreFont, angle_multiplier.ToString(), score_position + new Vector2(0, 40), Color.Red); 
 
             
@@ -213,7 +263,16 @@ namespace ArmStrong
                 spriteBatch.Draw(relax_arm_R_lower, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
                 spriteBatch.Draw(relax_body, main_body_position, Color.White);
                 spriteBatch.Draw(relax_arm_L_upper, main_body_position+shoulder_L_body_pos,null,Color.White, shoulder_L_rotation, shoulder_L_upper_arm_pos,1, SpriteEffects.None,0);
-                spriteBatch.Draw(relax_arm_L_lower, main_body_position + shoulder_L_body_pos - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), null, Color.White, 0, elbow_L_lower_arm_pos + elbow_adjustment - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), 1, SpriteEffects.None, 0);
+                //spriteBatch.Draw(relax_arm_L_lower, main_body_position + shoulder_L_body_pos - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), null, Color.White, 0, elbow_L_lower_arm_pos + elbow_adjustment - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), 1, SpriteEffects.None, 0);
+
+
+                //////////////////////////////////////////////////////////////////////////////////mark added
+
+                spriteBatch.Draw(relax_arm_L_lower, main_body_position + shoulder_L_body_pos - elbow_adjustment, null, Color.White, shoulder_L_rotation + elbow_L_rotation, elbow_L_lower_arm_pos, 1, SpriteEffects.None, 0);
+
+                //////////////////////////////////////////////////////////////////////////////////end mark added
+
+
             }
             else
             {
@@ -221,6 +280,25 @@ namespace ArmStrong
                 //spriteBatch.Draw(flex_arm_R_lower, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
                 spriteBatch.Draw(flex_body, main_body_position, Color.White);
                 spriteBatch.Draw(flex_arm_L_upper, main_body_position + shoulder_L_body_pos, null, Color.White, shoulder_L_rotation, shoulder_L_upper_arm_pos, 1, SpriteEffects.None, 0);
+
+
+                //////////////////////////////////////////////////////////////////////////////////mark added
+
+                spriteBatch.Draw(flex_arm_L_lower, main_body_position + shoulder_L_body_pos - elbow_adjustment, null, Color.White, shoulder_L_rotation + elbow_L_rotation, elbow_L_lower_arm_pos, 1, SpriteEffects.None, 0);
+
+                //calc points
+                if (calc_points)
+                {
+                    point_total = point_total + (ulong)(100 * angle_multiplier);
+                    calc_points = false;
+                }
+
+                //display the points
+                spriteBatch.DrawString(scoreFont, point_total.ToString(), score_position + new Vector2(0, 60), Color.Red);
+
+                //////////////////////////////////////////////////////////////////////////////////mark added
+
+
             }
 
 
@@ -240,6 +318,7 @@ namespace ArmStrong
             elbow_adjustment = new Vector2((float)(42.15 * (Math.Cos(0.389 + shoulder_L_rotation))), (float)(42.15 * (Math.Sin(0.389 + shoulder_L_rotation))));
             
         }
+
 
         public Vector2 Find_R_Elbow()
         {

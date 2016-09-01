@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/u0164776/Documents/Mark's School Files/Semester 1/PoseCraft/ArmStrong/ArmStrong/Content/Cards/card1.png</SourceFile>
-  <SourceTime>2016-08-30T20:55:19.1133409-06:00</SourceTime>
-  <DestFile>C:/Users/u0164776/Documents/Mark's School Files/Semester 1/PoseCraft/ArmStrong/ArmStrong/Content/bin/Windows/Cards/card1.xnb</DestFile>
-  <DestTime>2016-08-30T21:09:08.5893155-06:00</DestTime>
+  <SourceFile>N:/Grad School/02 Fall 16/EAE 6100/Project 1/PoseCraft/ArmStrong/ArmStrong/Content/Cards/card1.png</SourceFile>
+  <SourceTime>2016-08-31T22:42:28-06:00</SourceTime>
+  <DestFile>N:/Grad School/02 Fall 16/EAE 6100/Project 1/PoseCraft/ArmStrong/ArmStrong/Content/bin/Windows/Cards/card1.xnb</DestFile>
+  <DestTime>2016-08-31T22:58:46-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T00:36:08-06:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

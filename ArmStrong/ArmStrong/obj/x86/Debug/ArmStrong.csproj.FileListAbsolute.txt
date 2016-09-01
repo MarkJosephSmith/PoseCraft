@@ -147,3 +147,42 @@ C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\A
 C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_R_lower.xnb
 C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_R_upper.xnb
 C:\Users\u0164776\Documents\Mark's School Files\Semester 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_body.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\obj\x86\Debug\ArmStrong.exe
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\obj\x86\Debug\ArmStrong.pdb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\scoreFont.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card1.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card2.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card3.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_L_lower.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_L_upper.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_R_lower.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_R_upper.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_body.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_arm_L_lower.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_arm_L_upper.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_arm_R_lower.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_arm_R_upper.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_body.xnb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\ArmStrong.exe
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\ArmStrong.pdb
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\MonoGame.Framework.dll
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.dll
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.XInput.dll
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.RawInput.dll
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\MonoGame.Framework.xml
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.xml
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.XInput.xml
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.RawInput.xml
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+N:\Grad School\02 Fall 16\EAE 6100\Project 1\PoseCraft\ArmStrong\ArmStrong\obj\x86\Debug\ArmStrong.csprojResolveAssemblyReference.cache
