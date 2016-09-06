@@ -30,11 +30,15 @@ Left Lower Arm {
 
 to upper arm: 40, 86
 
+wrist: 55, 36
+
 }
 
 Right Lower Arm {
 
 to upper arm: 17, 72
+
+wrist: 55, 38
 
 }
 
