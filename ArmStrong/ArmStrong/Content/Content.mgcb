@@ -301,3 +301,9 @@
 /processorParam:TextureFormat=Compressed
 /build:Font/ScoreFont.spritefont
 
+#begin Font\textFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Font\textFont.spritefont
+

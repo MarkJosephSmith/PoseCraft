@@ -91,7 +91,14 @@ namespace ArmStrong
         private Vector2 elbow_adjustment_L = new Vector2();
         private Vector2 elbow_adjustment_R = new Vector2();
 
+
+        //font for score
+        private SpriteFont ScoreFont;
+        //font for text
+        private SpriteFont textFont;
+        //font for others
         private SpriteFont scoreFont;
+       
 
 
         public ArmStrong()
@@ -127,7 +134,9 @@ namespace ArmStrong
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            scoreFont = Content.Load<SpriteFont>("Font/ScoreFont");
+            scoreFont = Content.Load<SpriteFont>("scoreFont");
+            ScoreFont = Content.Load<SpriteFont>("Font/ScoreFont");
+            textFont = Content.Load<SpriteFont>("Font/textFont");
 
             // RELAXED BODY
             relax_body = Content.Load<Texture2D>("Wrestler Paperdoll/relax_body");
@@ -283,7 +292,7 @@ namespace ArmStrong
 
 
             //display the points
-            spriteBatch.DrawString(scoreFont, "Score: "+Convert.ToInt32(score_total).ToString(), score_position + new Vector2(0, 40), Color.Red);
+            //spriteBatch.DrawString(scoreFont, "Score: "+Convert.ToInt32(score_total).ToString(), score_position + new Vector2(0, 200), Color.Red);
 
             //display the Timer
             spriteBatch.DrawString(scoreFont, "Time: " +Convert.ToInt32(remaining_time).ToString(), score_position + new Vector2(0, 80), Color.Red);
@@ -345,6 +354,12 @@ namespace ArmStrong
 
             spriteBatch.Draw(podium, new Vector2(20,0), Color.White);
             spriteBatch.Draw(ring, Vector2.Zero, Color.White);
+
+            //display string "score"
+            spriteBatch.DrawString(textFont, "MACHO POINTS", score_position + new Vector2(-100, 295), Color.White);
+            //display the points
+            spriteBatch.DrawString(ScoreFont, Convert.ToInt32(score_total).ToString(), score_position + new Vector2(-130, 340), Color.White);
+
 
             spriteBatch.End();
 

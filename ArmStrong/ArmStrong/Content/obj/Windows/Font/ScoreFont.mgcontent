@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/u1089844/Documents/PoseCraft/ArmStrong/ArmStrong/Content/Font/ScoreFont.spritefont</SourceFile>
-  <SourceTime>2016-09-06T10:12:30.9066431-06:00</SourceTime>
+  <SourceTime>2016-09-06T11:17:14.559798-06:00</SourceTime>
   <DestFile>C:/Users/u1089844/Documents/PoseCraft/ArmStrong/ArmStrong/Content/bin/Windows/Font/ScoreFont.xnb</DestFile>
-  <DestTime>2016-09-06T10:35:18.7533581-06:00</DestTime>
+  <DestTime>2016-09-06T11:17:19.1460322-06:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2016-03-30T00:36:08-06:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
