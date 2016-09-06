@@ -190,3 +190,11 @@ D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\
 D:\Git Repositories\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\ring.xnb
 C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\bg.xnb
 C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\ring.xnb
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\podium.xnb
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Judge\judge_bad.xnb
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Judge\judge_failure.xnb
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Judge\judge_good.xnb
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Judge\judge_great.xnb
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Sweat\sweat1.xnb
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Sweat\sweat2.xnb
+C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Sweat\sweat3.xnb

@@ -32,7 +32,7 @@ namespace ArmStrong
 
         bool flex = false;
         int level = 1;
-        int stage = 1;
+        int card_state = 1;
 
         float tiredness;
         float tiredness_rate = 0.01f;
@@ -62,16 +62,22 @@ namespace ArmStrong
         private Texture2D flex_arm_R_upper;
         private Texture2D flex_arm_R_lower;
 
+        private Texture2D sweat1;
+        private Texture2D sweat2;
+        private Texture2D sweat3;
 
         //Declare card Textures
+        private Texture2D card1;
+        private Texture2D card2;
         private Texture2D card3;
 
         //Background
         private Texture2D background;
         private Texture2D ring;
+        private Texture2D podium;
 
         //Declare Sprite Vectors
-        private Vector2 main_body_position = new Vector2(120,10);
+        private Vector2 main_body_position = new Vector2(6,10);
         private Vector2 shoulder_L_body_pos = new Vector2(174,194);
         private Vector2 shoulder_L_upper_arm_pos = new Vector2(64,52);
         private Vector2 shoulder_R_body_pos = new Vector2(226, 191);
@@ -108,7 +114,7 @@ namespace ArmStrong
             shoulder_L_rotation = (float) rnd_L.NextDouble() * Pi;
             shoulder_R_rotation = (float) rnd_R.NextDouble() * Pi;
             remaining_time = timer_length;
-            tiredness = 0.01f;
+            tiredness = 0.4f;
             base.Initialize();
         }
 
@@ -138,11 +144,18 @@ namespace ArmStrong
             flex_arm_R_lower = Content.Load<Texture2D>("Wrestler Paperdoll/flex_arm_R_lower");
 
             //CARDS
+            card1 = Content.Load<Texture2D>("Cards/card1");
+            card2 = Content.Load<Texture2D>("Cards/card2");
             card3 = Content.Load<Texture2D>("Cards/card3");
 
             //BACKGROUND
             background = Content.Load<Texture2D>("bg");
             ring = Content.Load<Texture2D>("ring");
+            podium = Content.Load<Texture2D>("podium");
+
+            sweat1 = Content.Load<Texture2D>("Sweat/sweat1");
+            sweat2 = Content.Load<Texture2D>("Sweat/sweat2");
+            sweat3 = Content.Load<Texture2D>("Sweat/sweat3");
         }
 
         /// <summary>
@@ -162,6 +175,14 @@ namespace ArmStrong
             flex_arm_R_upper.Dispose();
             flex_arm_L_lower.Dispose();
             flex_arm_R_lower.Dispose();
+            card3.Dispose();
+            background.Dispose();
+            podium.Dispose();
+            ring.Dispose();
+            sweat1.Dispose();
+            sweat2.Dispose();
+            sweat3.Dispose();
+
         }
 
         /// <summary>
@@ -258,7 +279,7 @@ namespace ArmStrong
             
 
             //spriteBatch.DrawString(scoreFont,score.ToString(),score_position,Color.Yellow);
-            spriteBatch.DrawString(scoreFont, "Stage: "+ stage + " Level: " + level, score_position, Color.Red); //view angle as we rotate
+            spriteBatch.DrawString(scoreFont, "left: "+shoulder_L_rotation+ " right: " + shoulder_R_rotation, score_position+new Vector2(-60,0), Color.Red); //view angle as we rotate
 
 
             //display the points
@@ -268,27 +289,61 @@ namespace ArmStrong
             spriteBatch.DrawString(scoreFont, "Time: " +Convert.ToInt32(remaining_time).ToString(), score_position + new Vector2(0, 80), Color.Red);
 
             //display durability
-            spriteBatch.DrawString(scoreFont, "Durability: " + Convert.ToInt32(tiredness).ToString(), score_position + new Vector2(0, 120), Color.Red);
+            spriteBatch.DrawString(scoreFont, "Durability: " + Convert.ToInt32(tiredness*10000).ToString(), score_position + new Vector2(0, 120), Color.Red);
 
-            spriteBatch.Draw(card3, main_body_position, Color.White);
+            if(card_state == 1)
+            {
+                spriteBatch.Draw(card1, main_body_position, Color.White);
+            }
+            else if(card_state == 2)
+            {
+                spriteBatch.Draw(card2, main_body_position, Color.White);
+            }
+            else if (card_state == 3)
+            {
+                spriteBatch.Draw(card3, main_body_position, Color.White);
+            }
 
             if (flex == false)
             {
                 spriteBatch.Draw(relax_arm_R_upper, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
                 spriteBatch.Draw(relax_arm_R_lower, main_body_position + shoulder_R_body_pos - (shoulder_R_upper_arm_pos - elbow_R_upper_arm_pos), null, Color.White, 0, elbow_R_lower_arm_pos + elbow_adjustment_R - (shoulder_R_upper_arm_pos - elbow_R_upper_arm_pos), 1, SpriteEffects.None, 0);
-                spriteBatch.Draw(relax_body, main_body_position, Color.White);
-                spriteBatch.Draw(relax_arm_L_upper, main_body_position+shoulder_L_body_pos,null,Color.White, shoulder_L_rotation, shoulder_L_upper_arm_pos,1, SpriteEffects.None,0);
-                spriteBatch.Draw(relax_arm_L_lower, main_body_position + shoulder_L_body_pos - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), null, Color.White, 0, elbow_L_lower_arm_pos + elbow_adjustment_L - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(relax_body, main_body_position, Color.White);  
             }
             else
             {
                 spriteBatch.Draw(flex_arm_R_upper, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
-                //spriteBatch.Draw(flex_arm_R_lower, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
                 spriteBatch.Draw(flex_body, main_body_position, Color.White);
+            }
+
+            if(tiredness>0.3 && tiredness < 0.6)
+                   {
+                       spriteBatch.Draw(sweat1, main_body_position, Color.White);
+                   }
+                   else if(tiredness > 0.6 && tiredness < 1)
+                   {
+                       spriteBatch.Draw(sweat2, main_body_position, Color.White);
+                   }
+                   else if(tiredness > 1)
+                   {
+                       spriteBatch.Draw(sweat3, main_body_position, Color.White);
+                   }
+                   else
+                   {
+            
+                   }
+
+            if (flex == false)
+            {
+                spriteBatch.Draw(relax_arm_L_upper, main_body_position + shoulder_L_body_pos, null, Color.White, shoulder_L_rotation, shoulder_L_upper_arm_pos, 1, SpriteEffects.None, 0);
+                //spriteBatch.Draw(relax_arm_L_lower, main_body_position + shoulder_L_body_pos - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), null, Color.White, 0, elbow_L_lower_arm_pos + elbow_adjustment_L - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), 1, SpriteEffects.None, 0);
+            }
+            else
+            {
                 spriteBatch.Draw(flex_arm_L_upper, main_body_position + shoulder_L_body_pos, null, Color.White, shoulder_L_rotation, shoulder_L_upper_arm_pos, 1, SpriteEffects.None, 0);
             }
 
-
+            spriteBatch.Draw(podium, new Vector2(20,0), Color.White);
             spriteBatch.Draw(ring, Vector2.Zero, Color.White);
 
             spriteBatch.End();
@@ -316,10 +371,14 @@ namespace ArmStrong
             shoulder_R_rotation = (float)rnd_R.NextDouble() * Pi;
             flex = false;
            
-            if (level%4 == 0)
+            if (card_state == 3)
             {
                 level = 1;
-                stage++;
+                card_state = 1;
+            }
+            else
+            {
+                card_state++;
             }
 
         }
