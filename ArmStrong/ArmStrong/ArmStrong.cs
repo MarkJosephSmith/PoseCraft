@@ -13,7 +13,7 @@ namespace ArmStrong
     {
 
 
-        //a comment
+        //a comment that has changed
         
 
         GraphicsDeviceManager graphics;
@@ -24,7 +24,8 @@ namespace ArmStrong
         //Random Variables
         Random rnd_L = new Random();
         Random rnd_R = new Random();
-        Random rnd_tired = new Random();
+        Random rnd_tired_L_shoulder = new Random();
+        Random rnd_tired_L_elbow = new Random();
 
         float score_total = 0;
         float score_round = 0;
@@ -32,14 +33,19 @@ namespace ArmStrong
 
         bool flex = false;
         int level = 1;
-        int card_state = 1;
+        int card_state = 3;
+        int judge_state;
 
         float tiredness;
         float tiredness_rate = 0.01f;
 
+        float judgement_L;
+
         // Rotation angles
         float shoulder_R_rotation = 0f;
         float shoulder_L_rotation = 0f;
+        float elbow_L_rotation = 0f;
+        float elbow_R_rotation = 0f;
         float Pi = 3.14159f;
         float rotation_speed = 0.1f;
 
@@ -66,10 +72,18 @@ namespace ArmStrong
         private Texture2D sweat2;
         private Texture2D sweat3;
 
+        //Judge
+        private Texture2D judge_bad;
+        private Texture2D judge_good;
+        private Texture2D judge_great;
+        private Texture2D judge_failure;
+
         //Declare card Textures
         private Texture2D card1;
         private Texture2D card2;
         private Texture2D card3;
+        float card3_shoulder_L_perfect = 5.18f;
+        float card3_elbow_L_perfect = 2.80f;
 
         //Background
         private Texture2D background;
@@ -88,17 +102,16 @@ namespace ArmStrong
         private Vector2 elbow_R_upper_arm_pos = new Vector2(67, 29);
         private Vector2 elbow_R_lower_arm_pos = new Vector2(17, 72);
 
-        private Vector2 elbow_adjustment_L = new Vector2();
-        private Vector2 elbow_adjustment_R = new Vector2();
+        private Vector2 elbow_L_adjustment = new Vector2();
+        private Vector2 elbow_R_adjustment = new Vector2();
 
-
+        private SpriteFont scoreFont;
         //font for score
         private SpriteFont ScoreFont;
         //font for text
         private SpriteFont textFont;
-        //font for others
-        private SpriteFont scoreFont;
-       
+
+
 
 
         public ArmStrong()
@@ -121,7 +134,7 @@ namespace ArmStrong
             shoulder_L_rotation = (float) rnd_L.NextDouble() * Pi;
             shoulder_R_rotation = (float) rnd_R.NextDouble() * Pi;
             remaining_time = timer_length;
-            tiredness = 0.4f;
+            tiredness = 0.01f;
             base.Initialize();
         }
 
@@ -135,8 +148,8 @@ namespace ArmStrong
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             scoreFont = Content.Load<SpriteFont>("scoreFont");
-            ScoreFont = Content.Load<SpriteFont>("Font/ScoreFont");
             textFont = Content.Load<SpriteFont>("Font/textFont");
+            ScoreFont = Content.Load<SpriteFont>("Font/ScoreFont");
 
             // RELAXED BODY
             relax_body = Content.Load<Texture2D>("Wrestler Paperdoll/relax_body");
@@ -156,6 +169,12 @@ namespace ArmStrong
             card1 = Content.Load<Texture2D>("Cards/card1");
             card2 = Content.Load<Texture2D>("Cards/card2");
             card3 = Content.Load<Texture2D>("Cards/card3");
+
+            //JUDGE
+            judge_bad = Content.Load<Texture2D>("Judge/judge_bad");
+            judge_good = Content.Load<Texture2D>("Judge/judge_good");
+            judge_great = Content.Load<Texture2D>("Judge/judge_great");
+            judge_failure = Content.Load<Texture2D>("Judge/judge_failure");
 
             //BACKGROUND
             background = Content.Load<Texture2D>("bg");
@@ -203,17 +222,33 @@ namespace ArmStrong
         {
             
 
-            Find_Elbows();
+            Find_L_Elbow();
+            Find_R_Elbow();
 
             KeyboardState newState = Keyboard.GetState();  // get the newest state
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-             
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                elbow_L_rotation = elbow_L_rotation + rotation_speed;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                elbow_L_rotation = elbow_L_rotation - rotation_speed;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                elbow_R_rotation = elbow_R_rotation + rotation_speed;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                elbow_R_rotation = elbow_R_rotation - rotation_speed;
+            }
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 shoulder_L_rotation = shoulder_L_rotation + rotation_speed;
-
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
@@ -230,8 +265,6 @@ namespace ArmStrong
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 flex = true;
-
-
             }
             
 
@@ -256,7 +289,7 @@ namespace ArmStrong
             {
                 tiredness = tiredness + 0.0001f;
                 score_total = score_total + (score_rate * angle_multiplier_R) + (score_rate * angle_multiplier_L); //Score
-                if(rnd_tired.NextDouble()>0.5)
+                if(rnd_tired_L_shoulder.NextDouble()>0.5)
                 {
                     shoulder_L_rotation = shoulder_L_rotation - rotation_speed*tiredness;
                 }
@@ -264,7 +297,18 @@ namespace ArmStrong
                 {
                     shoulder_L_rotation = shoulder_L_rotation + rotation_speed*tiredness;
                 }
+
+                if (rnd_tired_L_elbow.NextDouble() > 0.5)
+                {
+                    elbow_L_rotation = elbow_L_rotation - rotation_speed * tiredness;
+                }
+                else
+                {
+                    elbow_L_rotation = elbow_L_rotation + rotation_speed * tiredness;
+                }
             }
+
+            Judgement();
 
             if(remaining_time < 0)
             {
@@ -285,14 +329,29 @@ namespace ArmStrong
             spriteBatch.Begin();
 
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
-            
 
+            if (judge_state == 3)
+            {
+                spriteBatch.Draw(judge_great, Vector2.Zero, Color.White);
+            }
+            else if (judge_state == 2)
+            {
+                spriteBatch.Draw(judge_good, Vector2.Zero, Color.White);
+            }
+            else if (judge_state == 1)
+            {
+                spriteBatch.Draw(judge_bad, Vector2.Zero, Color.White);
+            }
+            else
+            {
+                spriteBatch.Draw(judge_failure, Vector2.Zero, Color.White);
+            }
             //spriteBatch.DrawString(scoreFont,score.ToString(),score_position,Color.Yellow);
-            spriteBatch.DrawString(scoreFont, "left: "+shoulder_L_rotation+ " right: " + shoulder_R_rotation, score_position+new Vector2(-60,0), Color.Red); //view angle as we rotate
+            spriteBatch.DrawString(scoreFont, "shoulder: "+shoulder_L_rotation+ " elbow: " + elbow_L_rotation, score_position+new Vector2(-100,0), Color.Red); //view angle as we rotate
 
 
             //display the points
-            //spriteBatch.DrawString(scoreFont, "Score: "+Convert.ToInt32(score_total).ToString(), score_position + new Vector2(0, 200), Color.Red);
+           // spriteBatch.DrawString(scoreFont, "Score: "+Convert.ToInt32(score_total).ToString(), score_position + new Vector2(0, 40), Color.Red);
 
             //display the Timer
             spriteBatch.DrawString(scoreFont, "Time: " +Convert.ToInt32(remaining_time).ToString(), score_position + new Vector2(0, 80), Color.Red);
@@ -312,16 +371,21 @@ namespace ArmStrong
             {
                 spriteBatch.Draw(card3, main_body_position, Color.White);
             }
+            else
+            {
+
+            }
 
             if (flex == false)
             {
                 spriteBatch.Draw(relax_arm_R_upper, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
-                spriteBatch.Draw(relax_arm_R_lower, main_body_position + shoulder_R_body_pos - (shoulder_R_upper_arm_pos - elbow_R_upper_arm_pos), null, Color.White, 0, elbow_R_lower_arm_pos + elbow_adjustment_R - (shoulder_R_upper_arm_pos - elbow_R_upper_arm_pos), 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(relax_arm_R_lower, main_body_position + shoulder_R_body_pos - (elbow_R_adjustment * new Vector2(-1, 1)), null, Color.White, shoulder_R_rotation + elbow_R_rotation, elbow_R_lower_arm_pos, 1, SpriteEffects.None, 0);
                 spriteBatch.Draw(relax_body, main_body_position, Color.White);  
             }
             else
             {
                 spriteBatch.Draw(flex_arm_R_upper, main_body_position + shoulder_R_body_pos, null, Color.White, shoulder_R_rotation, shoulder_R_upper_arm_pos, 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(flex_arm_R_lower, main_body_position + shoulder_R_body_pos - (elbow_R_adjustment * new Vector2(-1, 1)), null, Color.White, shoulder_R_rotation + elbow_R_rotation, elbow_R_lower_arm_pos, 1, SpriteEffects.None, 0);
                 spriteBatch.Draw(flex_body, main_body_position, Color.White);
             }
 
@@ -345,21 +409,22 @@ namespace ArmStrong
             if (flex == false)
             {
                 spriteBatch.Draw(relax_arm_L_upper, main_body_position + shoulder_L_body_pos, null, Color.White, shoulder_L_rotation, shoulder_L_upper_arm_pos, 1, SpriteEffects.None, 0);
-                //spriteBatch.Draw(relax_arm_L_lower, main_body_position + shoulder_L_body_pos - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), null, Color.White, 0, elbow_L_lower_arm_pos + elbow_adjustment_L - (shoulder_L_upper_arm_pos - elbow_L_upper_arm_pos), 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(relax_arm_L_lower, main_body_position + shoulder_L_body_pos - elbow_L_adjustment, null, Color.White, shoulder_L_rotation + elbow_L_rotation, elbow_L_lower_arm_pos, 1, SpriteEffects.None, 0);
             }
             else
             {
                 spriteBatch.Draw(flex_arm_L_upper, main_body_position + shoulder_L_body_pos, null, Color.White, shoulder_L_rotation, shoulder_L_upper_arm_pos, 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(flex_arm_L_lower, main_body_position + shoulder_L_body_pos - elbow_L_adjustment, null, Color.White, shoulder_L_rotation + elbow_L_rotation, elbow_L_lower_arm_pos, 1, SpriteEffects.None, 0);
             }
 
             spriteBatch.Draw(podium, new Vector2(20,0), Color.White);
             spriteBatch.Draw(ring, Vector2.Zero, Color.White);
 
-            //display string "score"
+            //display string "MACHO POINTS"
             spriteBatch.DrawString(textFont, "MACHO POINTS", score_position + new Vector2(-100, 295), Color.White);
+
             //display the points
             spriteBatch.DrawString(ScoreFont, Convert.ToInt32(score_total).ToString(), score_position + new Vector2(-130, 340), Color.White);
-
 
             spriteBatch.End();
 
@@ -370,12 +435,18 @@ namespace ArmStrong
         /*  
          *
          */
-        public void Find_Elbows()
-        {
-            elbow_adjustment_L = new Vector2((float)(42.15 * (Math.Cos(0.389 + shoulder_L_rotation))), (float)(42.15 * (Math.Sin(0.389 + shoulder_L_rotation))));
-            elbow_adjustment_R = new Vector2((float)(65.94 * (Math.Cos(5.57 + shoulder_R_rotation-Pi))), (float)(65.94 * (Math.Sin(5.57 + shoulder_R_rotation-Pi))));
 
+        public void Find_L_Elbow()
+        {
+            elbow_L_adjustment = new Vector2((float)(42.15 * (Math.Cos(0.389 + shoulder_L_rotation))), (float)(42.15 * (Math.Sin(0.389 + shoulder_L_rotation))));
         }
+
+
+        public void Find_R_Elbow()
+        {
+            elbow_R_adjustment = new Vector2((float)(45.79 * (Math.Cos(0.5517 - shoulder_R_rotation))), (float)(45.79 * (Math.Sin(0.5517 - shoulder_R_rotation))));
+        }
+
 
 
         public void Reset_Card()
@@ -389,11 +460,58 @@ namespace ArmStrong
             if (card_state == 3)
             {
                 level = 1;
-                card_state = 1;
+                card_state = 3;
             }
             else
             {
-                card_state++;
+                card_state = 3;
+            }
+
+        }
+
+        public void Judgement()
+        {
+
+            if (Math.Cos(shoulder_L_rotation) < 0 && Math.Cos(elbow_L_rotation) < 0)
+            {
+                judgement_L = 0;
+            }
+            else if (Math.Cos(shoulder_L_rotation) < 0 && Math.Cos(elbow_L_rotation) > 0)
+            {
+                judgement_L = (float) Math.Cos(elbow_L_rotation);
+            }
+            else if (Math.Cos(shoulder_L_rotation) > 0 && Math.Cos(elbow_L_rotation) < 0)
+            {
+                judgement_L = (float) Math.Cos(shoulder_L_rotation);
+            }
+            else if (Math.Cos(shoulder_L_rotation) > 0 && Math.Cos(elbow_L_rotation) > 0)
+            {
+                judgement_L = (float) Math.Cos(shoulder_L_rotation) + (float) Math.Cos(elbow_L_rotation);
+            }
+            else
+            {
+
+            }
+
+            if (judgement_L > 1.5)
+            {
+                judge_state = 3;
+            }
+            else if (judgement_L < 1.5 && judgement_L > 0.5)
+            {
+                judge_state = 2;
+            }
+            else if (judgement_L < 0.5 && judgement_L > 0) 
+            {
+                judge_state = 1;
+            }
+            else if(judgement_L == 0)
+            {
+                judge_state = 0;
+            }
+            else
+            {
+
             }
 
         }
