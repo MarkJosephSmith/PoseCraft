@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/Sweat/sweat1.png</SourceFile>
-  <SourceTime>2016-09-06T09:10:33.7877835-06:00</SourceTime>
-  <DestFile>C:/Users/u0898768/Desktop/PoseCraft/ArmStrong/ArmStrong/Content/bin/Windows/Sweat/sweat1.xnb</DestFile>
-  <DestTime>2016-09-06T09:21:41.9563646-06:00</DestTime>
+  <SourceFile>C:/Users/u1089844/Documents/PoseCraft/ArmStrong/ArmStrong/Content/Sweat/sweat1.png</SourceFile>
+  <SourceTime>2016-09-06T10:31:47.2082635-06:00</SourceTime>
+  <DestFile>C:/Users/u1089844/Documents/PoseCraft/ArmStrong/ArmStrong/Content/bin/Windows/Sweat/sweat1.xnb</DestFile>
+  <DestTime>2016-09-06T10:35:18.6735244-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T00:36:08-06:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

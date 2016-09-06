@@ -198,3 +198,52 @@ C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Co
 C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Sweat\sweat1.xnb
 C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Sweat\sweat2.xnb
 C:\Users\u0898768\Desktop\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Sweat\sweat3.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\obj\x86\Debug\ArmStrong.exe
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\obj\x86\Debug\ArmStrong.pdb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\bg.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\podium.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\ring.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\scoreFont.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card1.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card2.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Cards\card3.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Judge\judge_bad.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Judge\judge_failure.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Judge\judge_good.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Judge\judge_great.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Sweat\sweat1.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Sweat\sweat2.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Sweat\sweat3.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_L_lower.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_L_upper.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_R_lower.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_arm_R_upper.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\flex_body.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_arm_L_lower.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_arm_L_upper.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_arm_R_lower.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_arm_R_upper.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Wrestler Paperdoll\relax_body.xnb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\ArmStrong.exe
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\ArmStrong.pdb
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.dll
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.RawInput.dll
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.xml
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.RawInput.xml
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+C:\Users\u1089844\Documents\PoseCraft\ArmStrong\ArmStrong\bin\Windows\x86\Debug\Content\Font\ScoreFont.xnb

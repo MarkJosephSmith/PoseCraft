@@ -127,7 +127,7 @@ namespace ArmStrong
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            scoreFont = Content.Load<SpriteFont>("scoreFont");
+            scoreFont = Content.Load<SpriteFont>("Font/ScoreFont");
 
             // RELAXED BODY
             relax_body = Content.Load<Texture2D>("Wrestler Paperdoll/relax_body");

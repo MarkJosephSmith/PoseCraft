@@ -295,3 +295,9 @@
 /processorParam:TextureFormat=Color
 /build:Sweat/sweat3.png
 
+#begin Font/ScoreFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Font/ScoreFont.spritefont
+
