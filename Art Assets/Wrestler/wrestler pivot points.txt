@@ -1,0 +1,46 @@
+﻿Wresler - Important Points
+
+-Connection : X, Y-
+
+Body {
+
+to left arm: 174, 194
+
+to right arm: 226,191
+
+}
+
+Left Upper Arm {
+
+to body: 64, 52
+
+to lower arm: 25, 36
+
+}
+
+Right Upper Arm {
+
+to body: 28, 53
+
+to lower arm: 67, 29
+
+}
+
+Left Lower Arm {
+
+to upper arm: 40, 86
+
+wrist: 55, 36
+
+}
+
+Right Lower Arm {
+
+to upper arm: 17, 72
+
+wrist: 55, 38
+
+}
+
+
+}
