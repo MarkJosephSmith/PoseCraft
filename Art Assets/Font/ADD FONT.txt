@@ -1,0 +1,13 @@
+//font for score
+private SpriteFont ScoreFont;
+//font for text
+private SpriteFont textFont;
+
+
+
+
+//display string "MACHO POINTS"
+spriteBatch.DrawString(textFont, "MACHO POINTS", score_position + new Vector2(-100, 295), Color.White);
+
+//display the points
+spriteBatch.DrawString(ScoreFont, Convert.ToInt32(score_total).ToString(), score_position + new Vector2(-130, 340), Color.White);
