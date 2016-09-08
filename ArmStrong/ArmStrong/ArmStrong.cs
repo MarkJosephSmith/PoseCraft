@@ -162,7 +162,7 @@ namespace ArmStrong
             remaining_strikes = 3;
             strike_buffer = 15;
             game_state = 1;
-            card_state = 2;
+            card_state = 1;
             base.Initialize();
             theme_instance.Play();
         }
@@ -456,8 +456,8 @@ namespace ArmStrong
                 }
 
 
-                spriteBatch.DrawString(plainFont, "Lshoulder: " + shoulder_L_rotation + " Lelbow: " + elbow_L_rotation, score_position + new Vector2(-100, 0), Color.Red); //view angle as we rotate
-                spriteBatch.DrawString(plainFont, "Rshoulder: " + shoulder_R_rotation + " Relbow: " + elbow_R_rotation, score_position + new Vector2(-100, 20), Color.Red); //view angle as we rotate
+                spriteBatch.DrawString(plainFont, "Lshoulder: " + shoulder_L_rotation + " Lelbow: " + elbow_L_rotation, score_position + new Vector2(-150, 0), Color.Red); //view angle as we rotate
+                spriteBatch.DrawString(plainFont, "Rshoulder: " + shoulder_R_rotation + " Relbow: " + elbow_R_rotation, score_position + new Vector2(-150, 20), Color.Red); //view angle as we rotate
 
 
 

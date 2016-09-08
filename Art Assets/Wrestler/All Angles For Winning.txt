@@ -1,0 +1,32 @@
+Pose Angles:
+
+	Card 1: Hulkamania
+		Left Shoulder 	0
+		Left Elbow 		0
+		Right Shoulder 	0
+		Right Elbow 	0
+
+	Card 2: Beast Mode
+		Left Shoulder 	6.438583
+		Left Elbow 		-0.02
+		Right Shoulder 	6.368582
+		Right Elbow 	-1.349
+		
+	Card 3: Super Justice
+		Left Shoulder 	5.120202
+		Left Elbow 		-3.40
+		Right Shoulder 	7.00
+		Right Elbow 	2.03
+		
+	Card 4: The Champ
+		Left Shoulder 	4.592286
+		Left Elbow 		-5.230025
+		Right Shoulder 	3.089114
+		Right Elbow 	0.029999
+		
+		
+	Card 5: Ultra Falcon
+		Left Shoulder 	5.079138
+		Left Elbow 		-7.570078
+		Right Shoulder 	1.119116
+		Right Elbow 	-0.070000
