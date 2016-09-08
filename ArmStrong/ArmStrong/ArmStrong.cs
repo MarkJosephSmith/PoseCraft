@@ -67,6 +67,8 @@ namespace ArmStrong
 
         //SOUND EFFECT
         private SoundEffect sound_failure;
+        private SoundEffect theme;
+        private SoundEffectInstance theme_instance;
 
         //Declare Body Textures
         private Texture2D relax_body;
@@ -94,6 +96,8 @@ namespace ArmStrong
         private Texture2D card1;
         private Texture2D card2;
         private Texture2D card3;
+        private Texture2D card4;
+        private Texture2D card5;
         private Texture2D card_clock;
         private Texture2D clock_hand;
         float card3_shoulder_L_perfect = 5.18f;
@@ -107,6 +111,7 @@ namespace ArmStrong
         //SCREENS
         private Texture2D startscreen;
         private Texture2D gameover;
+        private Texture2D pressspace;
 
         //Declare Sprite Vectors
         private Vector2 main_body_position = new Vector2(6,10);
@@ -157,7 +162,9 @@ namespace ArmStrong
             remaining_strikes = 3;
             strike_buffer = 15;
             game_state = 1;
+            card_state = 1;
             base.Initialize();
+            theme_instance.Play();
         }
 
         /// <summary>
@@ -193,6 +200,9 @@ namespace ArmStrong
             card1 = Content.Load<Texture2D>("Cards/card1");
             card2 = Content.Load<Texture2D>("Cards/card2");
             card3 = Content.Load<Texture2D>("Cards/card3");
+            card4 = Content.Load<Texture2D>("Cards/card4");
+            card5 = Content.Load<Texture2D>("Cards/card5");
+
             clock_hand = Content.Load<Texture2D>("Cards/clock_hand");
             card_clock = Content.Load<Texture2D>("Cards/card_clock");
             //JUDGE
@@ -213,9 +223,12 @@ namespace ArmStrong
             //SCREENS
             startscreen = Content.Load<Texture2D>("startscreen");
             gameover = Content.Load<Texture2D>("gameover");
+            pressspace = Content.Load<Texture2D>("pressspace");
 
             //SOUND FX
             sound_failure = Content.Load<SoundEffect>("SoundFX/failure");
+            theme = Content.Load<SoundEffect>("SoundFX/theme");
+            theme_instance = theme.CreateInstance();
         }
 
         /// <summary>
@@ -266,7 +279,7 @@ namespace ArmStrong
             }
             else if (game_state == 2)
             {
-
+                theme_instance.Stop();
 
                 Find_L_Elbow();
                 Find_R_Elbow();
@@ -418,6 +431,7 @@ namespace ArmStrong
             if (game_state == 1)
             {
                 spriteBatch.Draw(startscreen, Vector2.Zero, Color.White);
+                spriteBatch.Draw(pressspace, new Vector2(150 ,400), Color.White);
             }
             else if (game_state == 2)
             {
@@ -464,6 +478,14 @@ namespace ArmStrong
                 {
                     spriteBatch.Draw(card3, main_body_position, Color.White);
                 }
+                else if (card_state == 4)
+                {
+                    spriteBatch.Draw(card4, main_body_position, Color.White);
+                }
+                else if (card_state == 5)
+                {
+                    spriteBatch.Draw(card5, main_body_position, Color.White);
+                }
                 else
                 {
 
@@ -482,15 +504,15 @@ namespace ArmStrong
                     spriteBatch.Draw(flex_body, main_body_position, Color.White);
                 }
 
-                if (tiredness > 0.3 && tiredness < 0.6)
+                if (tiredness > 0.2 && tiredness < 0.4)
                 {
                     spriteBatch.Draw(sweat1, main_body_position, Color.White);
                 }
-                else if (tiredness > 0.6 && tiredness < 1)
+                else if (tiredness > 0.4 && tiredness < 0.6)
                 {
                     spriteBatch.Draw(sweat2, main_body_position, Color.White);
                 }
-                else if (tiredness > 1)
+                else if (tiredness > 0.6)
                 {
                     spriteBatch.Draw(sweat3, main_body_position, Color.White);
                 }
@@ -558,14 +580,14 @@ namespace ArmStrong
             shoulder_R_rotation = (float)rnd_R.NextDouble() * Pi;
             flex = false;
            
-            if (card_state == 3)
+            if (card_state == 5)
             {
                 level = 1;
-                card_state = 3;
+                card_state = 1;
             }
             else
             {
-                card_state = 3;
+                card_state++;
             }
 
             if(remaining_strikes == 0)
