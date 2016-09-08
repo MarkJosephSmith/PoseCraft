@@ -55,13 +55,13 @@ namespace ArmStrong
         float elbow_L_rotation = 0f;
         float elbow_R_rotation = 0f;
         float Pi = 3.14159f;
-        float rotation_speed = 0.1f;
+        float rotation_speed = 0.01f;
 
         
 
 
         //Timer Variables
-        private int timer_length = 30;
+        private int timer_length = 300;
         private float remaining_time;
         private float clock_rotation;
 
@@ -162,7 +162,7 @@ namespace ArmStrong
             remaining_strikes = 3;
             strike_buffer = 15;
             game_state = 1;
-            card_state = 1;
+            card_state = 2;
             base.Initialize();
             theme_instance.Play();
         }
@@ -456,7 +456,8 @@ namespace ArmStrong
                 }
 
 
-                spriteBatch.DrawString(plainFont, "shoulder: " + shoulder_L_rotation + " elbow: " + elbow_L_rotation, score_position + new Vector2(-100, 0), Color.Red); //view angle as we rotate
+                spriteBatch.DrawString(plainFont, "Lshoulder: " + shoulder_L_rotation + " Lelbow: " + elbow_L_rotation, score_position + new Vector2(-100, 0), Color.Red); //view angle as we rotate
+                spriteBatch.DrawString(plainFont, "Rshoulder: " + shoulder_R_rotation + " Relbow: " + elbow_R_rotation, score_position + new Vector2(-100, 20), Color.Red); //view angle as we rotate
 
 
 
