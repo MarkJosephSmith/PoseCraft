@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
+
 
 //9/7/16
 
@@ -23,7 +25,12 @@ namespace ArmStrong
         SpriteBatch spriteBatch;
 
         private KeyboardState oldState;
-        
+
+        //pose_card variables
+        //the current pose card being displayed and scored.
+        Pose_Card current_card = new Pose_Card(0, 0, 0, 0, null);
+        Queue<Pose_Card> card_q = new Queue<Pose_Card>();
+
         //Random Variables
         Random rnd_L = new Random();
         Random rnd_R = new Random();
@@ -36,6 +43,8 @@ namespace ArmStrong
         float score_total = 0;
         float score_round = 0;
         float score_rate = 100f;
+
+        bool hasGrunted = false; //fixes multigrunt bug
 
         bool flex = false;
         int level = 1;
@@ -294,6 +303,16 @@ namespace ArmStrong
             sparkle1 = Content.Load<Texture2D>("Sweat/sparkle1");
             sparkle2 = Content.Load<Texture2D>("Sweat/sparkle2");
             sparkle3 = Content.Load<Texture2D>("Sweat/sparkle3");
+
+            //create the card queue
+            card_q.Enqueue(new Pose_Card(0, 0, 0, 0, card1));  //Hulkamania
+            card_q.Enqueue(new Pose_Card(6.438583f, -0.02f, 6.368582f, -1.349f, card2)); //Beast Mode
+            card_q.Enqueue(new Pose_Card(5.120202f, -3.40f, 7.00f, 2.03f, card3)); //Super Justice
+            card_q.Enqueue(new Pose_Card(4.592286f, -5.230025f, 3.089114f, 0.029999f, card4)); //The Champ
+            card_q.Enqueue(new Pose_Card(5.079138f, -7.570078f, 1.119116f, -0.070000f, card5)); //Ultra Falcon
+
+            current_card = card_q.Dequeue();
+            card_q.Enqueue(current_card);
         }
 
         /// <summary>
@@ -320,6 +339,9 @@ namespace ArmStrong
             sweat1.Dispose();
             sweat2.Dispose();
             sweat3.Dispose();
+
+            card_q.Clear();
+
 
         }
 
@@ -387,7 +409,10 @@ namespace ArmStrong
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
                     flex = true;
-                    grunting.Play();
+                    if (hasGrunted = false)
+                    {
+                        grunting.Play();
+                    }
 
                 }
 
@@ -708,7 +733,8 @@ namespace ArmStrong
         }
 
 
-        /*  
+        /* finding offset locations to track elbow joints as 
+         * the shoulder rotates 
          *
          */
 
@@ -731,8 +757,14 @@ namespace ArmStrong
             shoulder_L_rotation = (float)rnd_L.NextDouble() * Pi;
             shoulder_R_rotation = (float)rnd_R.NextDouble() * Pi;
             flex = false;
-            
-            if(result == true)
+            //reset grunt
+            hasGrunted = false;
+
+            //these next 2 lines probably make a ton of other stuff unneeded
+            current_card = card_q.Dequeue();
+            card_q.Enqueue(current_card);
+
+            if (result == true)
             {
                 cheering.Play();
                 level++;
@@ -760,6 +792,21 @@ namespace ArmStrong
         {
             if(flex == true)
             {
+
+                //new judgement system
+                //the state of the judge
+                int calc_state = 0;
+
+                //get the score, cast it to an int so it cuts off any remainders
+                calc_state = (int)current_card.Calc_Score(shoulder_L_rotation, elbow_L_rotation, shoulder_R_rotation, elbow_R_rotation);
+
+                //set the judge state
+                judge_state = calc_state;
+
+                //Stephen's old judgement system.  I built mine to replace this exact block of code.
+                //it looks like other things around it have changed but this block is the same so
+                //I'm replacing it. -Mark
+                /*
                 if (Math.Cos(shoulder_L_rotation) < 0 && Math.Cos(elbow_L_rotation) < 0)
                 {
                     judgement_L = 0;
@@ -800,7 +847,7 @@ namespace ArmStrong
                 else
                 {
 
-                }
+                }*/
             }
             else
             {
@@ -822,10 +869,10 @@ namespace ArmStrong
         protected class Pose_Card
         {
             //correct posses for full points from the card
-            float angle_L_upper;
-            float angle_R_upper;
-            float angle_L_lower;
-            float angle_R_lower;
+            float LShoulder;
+            float LElbow;
+            float RShoulder;
+            float RElbow;
 
             //sprite
             Texture2D card_art;
@@ -833,16 +880,72 @@ namespace ArmStrong
 
 
             /*4 floats, each an angle in radians that indicates the correct arm position
-             *1 texture for the sprite image 
+             *1 texture for the sprite image ///not yet in 
              */
 
-            Pose_Card(float upperL, float upperR, float lowerL, float lowerR, Texture2D art)
+            public Pose_Card(float ls, float le, float rs, float re, Texture2D art)
             {
-                
 
+                //get the angles in radians as a float
+                LShoulder = (float)Math.Cos(ls);
+                LElbow = (float)Math.Cos(le);
+                RShoulder = (float)Math.Cos(rs);
+                RElbow = (float)Math.Cos(re);
+
+                card_art = art;
 
             }
 
+            /// <summary>
+            /// calculate the score using the 4 input angles and the card's default settings.
+            /// </summary>
+            /// <returns>Returns a value between 0 and 3 to corespond with the judge state.</returns>
+            public float Calc_Score(float ls, float le, float rs, float re)
+            {
+                float result = 0; //return this at the end
+
+                //mod off all 4 input angles
+                ls = (float)Math.Cos(ls);
+                le = (float)Math.Cos(le);
+                rs = (float)Math.Cos(rs);
+                re = (float)Math.Cos(re);
+
+                //these 4 values determine how close each angle is
+                float lsValue = ls / LShoulder;
+                float leValue = le / LElbow;
+                float rsValue = rs / RShoulder;
+                float reValue = re / RElbow;
+
+                //round off any negative values to 0
+                if (lsValue < 0)
+                {
+                    lsValue = 0;
+                }
+                if (rsValue < 0)
+                {
+                    rsValue = 0;
+                }
+                if (leValue < 0)
+                {
+                    leValue = 0;
+                }
+                if (reValue < 0)
+                {
+                    reValue = 0;
+                }
+
+                //at this point each one has a value from 0 to 1 and we have 4 total angles.
+                result = lsValue * (.75f) + leValue * (.75f) + rsValue * (.75f) + reValue * (.75f);
+
+                //this is pretty much how it should score but we are going to convert to an int
+                //that's going to make a full 3 nearly impossible so give a little padding on it.
+                if (result > 2.95f)
+                {
+                    result = 3.0f;
+                }
+
+                return result;
+            }
 
         }
 
