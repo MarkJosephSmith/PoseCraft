@@ -23,7 +23,11 @@ namespace ArmStrong
         SpriteBatch spriteBatch;
 
         private KeyboardState oldState;
-        
+
+        //the current pose card being displayed and scored.
+        Pose_Card current_card;
+
+
         //Random Variables
         Random rnd_L = new Random();
         Random rnd_R = new Random();
@@ -600,7 +604,16 @@ namespace ArmStrong
 
         public void Judgement()
         {
-
+            //the state of the judge
+            int calc_state = 0;
+            
+            //get the score, cast it to an int so it cuts off any remainders
+            calc_state = (int)current_card.Calc_Score(shoulder_L_rotation, elbow_L_rotation, shoulder_R_rotation, elbow_R_rotation);
+            
+            //set the judge state
+            judge_state = calc_state;
+            
+            /*  old judge system
             if (Math.Cos(shoulder_L_rotation) < 0 && Math.Cos(elbow_L_rotation) < 0)
             {
                 judgement_L = 0;
@@ -642,6 +655,7 @@ namespace ArmStrong
             {
 
             }
+            */
 
         }
 
@@ -651,25 +665,74 @@ namespace ArmStrong
         protected class Pose_Card
         {
             //correct posses for full points from the card
-            float angle_L_upper;
-            float angle_R_upper;
-            float angle_L_lower;
-            float angle_R_lower;
+            float LShoulder;
+            float LElbow;
+            float RShoulder;
+            float RElbow;
 
             //sprite
-            Texture2D card_art;
+            //Texture2D card_art;
 
 
 
             /*4 floats, each an angle in radians that indicates the correct arm position
-             *1 texture for the sprite image 
+             *1 texture for the sprite image ///not yet in 
              */
 
-            Pose_Card(float upperL, float upperR, float lowerL, float lowerR, Texture2D art)
+            Pose_Card(float ls, float le, float rs, float re) //Texture2D art)
             {
-                
 
+                //get the angles in radians as a float
+                LShoulder = (float)Math.Cos(ls);
+                LElbow = (float)Math.Cos(le);
+                RShoulder = (float)Math.Cos(rs);
+                RElbow = (float)Math.Cos(re);
 
+            }
+
+            /// <summary>
+            /// calculate the score using the 4 input angles and the card's default settings.
+            /// </summary>
+            /// <returns>Returns a value between 0 and 3 to corespond with the judge state.</returns>
+            public float Calc_Score(float ls, float le, float rs, float re)
+            {
+                float result = 0; //return this at the end
+
+                //mod off all 4 input angles
+                ls = (float)Math.Cos(ls);
+                le = (float)Math.Cos(le);
+                rs = (float)Math.Cos(rs);
+                re = (float)Math.Cos(re);
+
+                //these 4 values determine how close each angle is
+                float lsValue = ls / LShoulder;
+                float leValue = le / LElbow;
+                float rsValue = rs / RShoulder;
+                float reValue = re / RElbow;
+
+                //round off any negative values to 0
+                if (lsValue < 0)
+                {
+                    lsValue = 0;
+                }
+                if (rsValue < 0)
+                {
+                    rsValue = 0;
+                }
+                if (leValue < 0)
+                {
+                    leValue = 0;
+                }
+                if (reValue < 0)
+                {
+                    reValue = 0;
+                }
+
+                //at this point each one has a value from 0 to 1 and we have 4 total angles.
+                //we need a value from 0 to 3. soooo
+                result = lsValue*(.75f) + leValue*(.75f) + rsValue*(.75f) + reValue*(.75f);
+
+                return result;
             }
 
         }
