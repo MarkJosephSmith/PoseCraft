@@ -409,9 +409,11 @@ namespace ArmStrong
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
                     flex = true;
-                    if (hasGrunted = false)
+                    if (hasGrunted == false)
                     {
                         grunting.Play();
+                        hasGrunted = true;
+
                     }
 
                 }
