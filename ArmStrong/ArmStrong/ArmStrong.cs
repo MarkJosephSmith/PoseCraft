@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 
 //9/7/16
 
@@ -24,8 +25,11 @@ namespace ArmStrong
 
         private KeyboardState oldState;
 
+        //pose_card variables
         //the current pose card being displayed and scored.
-        Pose_Card current_card;
+        Pose_Card current_card = new Pose_Card(0, 0, 0, 0, null);
+        Queue<Pose_Card> card_q = new Queue<Pose_Card>();
+        
 
 
         //Random Variables
@@ -59,13 +63,13 @@ namespace ArmStrong
         float elbow_L_rotation = 0f;
         float elbow_R_rotation = 0f;
         float Pi = 3.14159f;
-        float rotation_speed = 0.01f;
+        float rotation_speed = 0.1f;
 
         
 
 
         //Timer Variables
-        private int timer_length = 300;
+        private int timer_length = 30;
         private float remaining_time;
         private float clock_rotation;
 
@@ -233,6 +237,17 @@ namespace ArmStrong
             sound_failure = Content.Load<SoundEffect>("SoundFX/failure");
             theme = Content.Load<SoundEffect>("SoundFX/theme");
             theme_instance = theme.CreateInstance();
+
+            //create the card queue
+            card_q.Enqueue(new Pose_Card(0, 0, 0, 0, card1));  //Hulkamania
+            card_q.Enqueue(new Pose_Card(6.438583f, -0.02f, 6.368582f, -1.349f, card2)); //Beast Mode
+            card_q.Enqueue(new Pose_Card(5.120202f, -3.40f, 7.00f, 2.03f, card3)); //Super Justice
+            card_q.Enqueue(new Pose_Card(4.592286f, -5.230025f, 3.089114f, 0.029999f, card4)); //The Champ
+            card_q.Enqueue(new Pose_Card(5.079138f, -7.570078f, 1.119116f, -0.070000f, card5)); //Ultra Falcon
+
+            current_card = card_q.Dequeue();
+            card_q.Enqueue(current_card);
+
         }
 
         /// <summary>
@@ -259,6 +274,7 @@ namespace ArmStrong
             sweat1.Dispose();
             sweat2.Dispose();
             sweat3.Dispose();
+            card_q.Clear();
 
         }
 
@@ -462,6 +478,7 @@ namespace ArmStrong
 
                 spriteBatch.DrawString(plainFont, "Lshoulder: " + shoulder_L_rotation + " Lelbow: " + elbow_L_rotation, score_position + new Vector2(-150, 0), Color.Red); //view angle as we rotate
                 spriteBatch.DrawString(plainFont, "Rshoulder: " + shoulder_R_rotation + " Relbow: " + elbow_R_rotation, score_position + new Vector2(-150, 20), Color.Red); //view angle as we rotate
+                spriteBatch.DrawString(plainFont, judge_state.ToString(), score_position + new Vector2(-150, 40), Color.Red); //view angle as we rotate
 
 
 
@@ -584,21 +601,37 @@ namespace ArmStrong
             shoulder_L_rotation = (float)rnd_L.NextDouble() * Pi;
             shoulder_R_rotation = (float)rnd_R.NextDouble() * Pi;
             flex = false;
-           
+
+            //these next 2 lines probably make a ton of other crap unneeded
+            current_card = card_q.Dequeue();
+            card_q.Enqueue(current_card);
+
+
             if (card_state == 5)
             {
+                //current_card = card_q.Dequeue();
+                //card_q.Enqueue(current_card);
+
                 level = 1;
                 card_state = 1;
+
+
             }
             else
             {
                 card_state++;
+
+                //these next 2 lines probably make a ton of other crap unneeded
+                //current_card = card_q.Dequeue();
+                //card_q.Enqueue(current_card);
+
             }
 
             if(remaining_strikes == 0)
             {
                 game_state = 3;
             }
+            
 
         }
 
@@ -671,7 +704,7 @@ namespace ArmStrong
             float RElbow;
 
             //sprite
-            //Texture2D card_art;
+            Texture2D card_art;
 
 
 
@@ -679,7 +712,7 @@ namespace ArmStrong
              *1 texture for the sprite image ///not yet in 
              */
 
-            Pose_Card(float ls, float le, float rs, float re) //Texture2D art)
+            public Pose_Card(float ls, float le, float rs, float re, Texture2D art)
             {
 
                 //get the angles in radians as a float
@@ -687,6 +720,8 @@ namespace ArmStrong
                 LElbow = (float)Math.Cos(le);
                 RShoulder = (float)Math.Cos(rs);
                 RElbow = (float)Math.Cos(re);
+
+                card_art = art;
 
             }
 
@@ -729,8 +764,14 @@ namespace ArmStrong
                 }
 
                 //at this point each one has a value from 0 to 1 and we have 4 total angles.
-                //we need a value from 0 to 3. soooo
                 result = lsValue*(.75f) + leValue*(.75f) + rsValue*(.75f) + reValue*(.75f);
+
+                //this is pretty much how it should score but we are going to convert to an int
+                //that's going to make a full 3 nearly impossible so give a little padding on it.
+                if (result > 2.95f)
+                {
+                    result = 3.0f;
+                }
 
                 return result;
             }
