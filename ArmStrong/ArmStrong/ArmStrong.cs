@@ -31,6 +31,7 @@ namespace ArmStrong
         Random rnd_tired_L_elbow = new Random();
         Random rnd_tired_R_shoulder = new Random();
         Random rnd_tired_R_elbow = new Random();
+        Random rnd_sparkle = new Random();
 
         float score_total = 0;
         float score_round = 0;
@@ -39,10 +40,11 @@ namespace ArmStrong
         bool flex = false;
         int level = 1;
         int game_state;
-        int card_state = 3;
+        int card_state;
         int judge_state;
         int remaining_strikes;
         int strike_buffer;
+        int light_state;
 
         float tiredness;
         float tiredness_rate = 0.01f;
@@ -57,8 +59,6 @@ namespace ArmStrong
         float Pi = 3.14159f;
         float rotation_speed = 0.1f;
 
-        
-
 
         //Timer Variables
         private int timer_length = 30;
@@ -69,6 +69,9 @@ namespace ArmStrong
         private SoundEffect sound_failure;
         private SoundEffect theme;
         private SoundEffectInstance theme_instance;
+        private SoundEffect cheering;
+        private SoundEffect grunting;
+
 
         //Declare Body Textures
         private Texture2D relax_body;
@@ -85,12 +88,18 @@ namespace ArmStrong
         private Texture2D sweat1;
         private Texture2D sweat2;
         private Texture2D sweat3;
+        private Texture2D sparkle1;
+        private Texture2D sparkle2;
+        private Texture2D sparkle3;
 
         //Judge
         private Texture2D judge_bad;
         private Texture2D judge_good;
         private Texture2D judge_great;
         private Texture2D judge_failure;
+        private Texture2D judge_unflexed;
+        private Texture2D redX_off;
+        private Texture2D redX_on;
 
         //Declare card Textures
         private Texture2D card1;
@@ -113,6 +122,24 @@ namespace ArmStrong
         private Texture2D gameover;
         private Texture2D pressspace;
 
+        //LIGHTS
+        private Texture2D light_1;
+        private Texture2D light_1_1;
+        private Texture2D light_1_2;
+        private Texture2D light_1_3;
+        private Texture2D light_2;
+        private Texture2D light_2_1;
+        private Texture2D light_2_2;
+        private Texture2D light_2_3;
+        private Texture2D light_3;
+        private Texture2D light_3_1;
+        private Texture2D light_3_2;
+        private Texture2D light_3_3;
+        private Texture2D light_4;
+        private Texture2D light_4_1;
+        private Texture2D light_4_2;
+        private Texture2D light_4_3;
+
         //Declare Sprite Vectors
         private Vector2 main_body_position = new Vector2(6,10);
         private Vector2 shoulder_L_body_pos = new Vector2(174,194);
@@ -127,6 +154,7 @@ namespace ArmStrong
 
         private Vector2 elbow_L_adjustment = new Vector2();
         private Vector2 elbow_R_adjustment = new Vector2();
+
 
 
         //font for score
@@ -156,15 +184,24 @@ namespace ArmStrong
         {
             // TODO: Add your initialization logic here
             shoulder_L_rotation = (float) rnd_L.NextDouble() * Pi;
-            shoulder_R_rotation = (float) rnd_R.NextDouble() * Pi;
+            shoulder_R_rotation = (float)rnd_R.NextDouble() * Pi;
+            Vector2 sparkle_1_position = new Vector2(rnd_sparkle.Next(140, 275), rnd_sparkle.Next(125, 320));
+            Vector2 sparkle_2_position = new Vector2(rnd_sparkle.Next(140, 275), rnd_sparkle.Next(125, 320));
+            Vector2 sparkle_3_position = new Vector2(rnd_sparkle.Next(140, 275), rnd_sparkle.Next(125, 320));
+            Vector2 sparkle_4_position = new Vector2(rnd_sparkle.Next(140, 275), rnd_sparkle.Next(125, 320));
+            Vector2 sparkle_5_position = new Vector2(rnd_sparkle.Next(140, 275), rnd_sparkle.Next(125, 320));
+            Vector2 sparkle_6_position = new Vector2(rnd_sparkle.Next(140, 275), rnd_sparkle.Next(125, 320));
+            Vector2 sparkle_7_position = new Vector2(rnd_sparkle.Next(140, 275), rnd_sparkle.Next(125, 320));
             remaining_time = timer_length;
             tiredness = 0.0f;
             remaining_strikes = 3;
             strike_buffer = 15;
             game_state = 1;
             card_state = 1;
+            light_state = 0;
             base.Initialize();
             theme_instance.Play();
+            theme_instance.IsLooped = true; 
         }
 
         /// <summary>
@@ -210,6 +247,9 @@ namespace ArmStrong
             judge_good = Content.Load<Texture2D>("Judge/judge_good");
             judge_great = Content.Load<Texture2D>("Judge/judge_great");
             judge_failure = Content.Load<Texture2D>("Judge/judge_failure");
+            judge_unflexed = Content.Load<Texture2D>("Judge/judge_unflexed");
+            redX_off = Content.Load<Texture2D>("Judge/redX_off");
+            redX_on = Content.Load<Texture2D>("Judge/redX_on");
 
             //BACKGROUND
             background = Content.Load<Texture2D>("bg");
@@ -220,6 +260,7 @@ namespace ArmStrong
             sweat2 = Content.Load<Texture2D>("Sweat/sweat2");
             sweat3 = Content.Load<Texture2D>("Sweat/sweat3");
 
+
             //SCREENS
             startscreen = Content.Load<Texture2D>("startscreen");
             gameover = Content.Load<Texture2D>("gameover");
@@ -229,6 +270,30 @@ namespace ArmStrong
             sound_failure = Content.Load<SoundEffect>("SoundFX/failure");
             theme = Content.Load<SoundEffect>("SoundFX/theme");
             theme_instance = theme.CreateInstance();
+            grunting = Content.Load<SoundEffect>("SoundFX/grunt");
+            cheering = Content.Load<SoundEffect>("SoundFX/cheering");
+
+            //LIGHTS
+            light_1 = Content.Load<Texture2D>("Lights/light1");
+            light_1_1 = Content.Load<Texture2D>("Lights/light1.1");
+            light_1_2 = Content.Load<Texture2D>("Lights/light1.2");
+            light_1_3 = Content.Load<Texture2D>("Lights/light1.3");
+            light_2 = Content.Load<Texture2D>("Lights/light2");
+            light_2_1 = Content.Load<Texture2D>("Lights/light2.1");
+            light_2_2 = Content.Load<Texture2D>("Lights/light2.2");
+            light_2_3 = Content.Load<Texture2D>("Lights/light2.3");
+            light_3 = Content.Load<Texture2D>("Lights/light3");
+            light_3_1 = Content.Load<Texture2D>("Lights/light3.1");
+            light_3_2 = Content.Load<Texture2D>("Lights/light3.2");
+            light_3_3 = Content.Load<Texture2D>("Lights/light3.3");
+            light_4 = Content.Load<Texture2D>("Lights/light4");
+            light_4_1 = Content.Load<Texture2D>("Lights/light4.1");
+            light_4_2 = Content.Load<Texture2D>("Lights/light4.2");
+            light_4_3 = Content.Load<Texture2D>("Lights/light4.3");
+
+            sparkle1 = Content.Load<Texture2D>("Sweat/sparkle1");
+            sparkle2 = Content.Load<Texture2D>("Sweat/sparkle2");
+            sparkle3 = Content.Load<Texture2D>("Sweat/sparkle3");
         }
 
         /// <summary>
@@ -279,7 +344,7 @@ namespace ArmStrong
             }
             else if (game_state == 2)
             {
-                theme_instance.Stop();
+                theme_instance.Volume = 0.2f;
 
                 Find_L_Elbow();
                 Find_R_Elbow();
@@ -322,6 +387,8 @@ namespace ArmStrong
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
                     flex = true;
+                    grunting.Play();
+
                 }
 
 
@@ -389,15 +456,45 @@ namespace ArmStrong
                         remaining_strikes--;
                         strike_buffer = 15;
                         sound_failure.Play();
-                        Reset_Card();
+                        Reset_Card(false);
                     }
+                }
+                else if(remaining_time <  7.5)
+                {
+                    remaining_strikes--;
+                    strike_buffer = 15;
+                    sound_failure.Play();
+                    Reset_Card(false);
                 }
 
                 Judgement();
 
+                remaining_time -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (level > 5)
+                {
+                    if (remaining_time > 25 || remaining_time < 5)
+                    {
+                        light_state = 1;
+                    }
+                    else if ((remaining_time < 25 && remaining_time > 20) || (remaining_time < 10 && remaining_time > 5))
+                    {
+                        light_state = 2;
+                    }
+                    else if (remaining_time > 10 && remaining_time < 20)
+                    {
+                        light_state = 3;
+                    }
+                }
+                else
+                {
+                    light_state = 0;
+                }
+
+
+
                 if (remaining_time < 0)
                 {
-                    Reset_Card();
+                    Reset_Card(true);
                 }
             }
             else if (game_state == 3)
@@ -405,9 +502,13 @@ namespace ArmStrong
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
                     remaining_strikes = 3;
+                    level = 1;
                     game_state= 1;
                 }
             }
+
+                
+
             
 
             if(strike_buffer !=0)
@@ -431,7 +532,7 @@ namespace ArmStrong
             if (game_state == 1)
             {
                 spriteBatch.Draw(startscreen, Vector2.Zero, Color.White);
-                spriteBatch.Draw(pressspace, new Vector2(150 ,400), Color.White);
+                spriteBatch.Draw(pressspace, new Vector2(15 ,450), Color.White);
             }
             else if (game_state == 2)
             {
@@ -452,16 +553,13 @@ namespace ArmStrong
                 }
                 else
                 {
-                    spriteBatch.Draw(judge_failure, Vector2.Zero, Color.White);
+                    spriteBatch.Draw(judge_unflexed, Vector2.Zero, Color.White);
                 }
 
 
                 spriteBatch.DrawString(plainFont, "shoulder: " + shoulder_L_rotation + " elbow: " + elbow_L_rotation, score_position + new Vector2(-100, 0), Color.Red); //view angle as we rotate
 
 
-
-                //display the Timer
-                spriteBatch.DrawString(plainFont, "Strikes: " + Convert.ToInt32(remaining_strikes).ToString(), score_position + new Vector2(0, 80), Color.Red);
 
                 //display durability
                 spriteBatch.DrawString(plainFont, "Durability: " + Convert.ToInt32(tiredness * 10000).ToString(), score_position + new Vector2(0, 120), Color.Red);
@@ -535,11 +633,64 @@ namespace ArmStrong
                 spriteBatch.Draw(podium, new Vector2(20, 0), Color.White);
                 spriteBatch.Draw(ring, Vector2.Zero, Color.White);
 
+
+               
+                if (remaining_strikes == 3)
+                {
+                    spriteBatch.Draw(redX_off, new Vector2(520, 220), Color.White);
+                    spriteBatch.Draw(redX_off, new Vector2(575, 220), Color.White);
+                    spriteBatch.Draw(redX_off, new Vector2(630, 220), Color.White);
+                }
+                else if (remaining_strikes == 2)
+                {
+                    spriteBatch.Draw(redX_on, new Vector2(520, 220), Color.White);
+                    spriteBatch.Draw(redX_off, new Vector2(575, 220), Color.White);
+                    spriteBatch.Draw(redX_off, new Vector2(630, 220), Color.White);
+                }
+                else if (remaining_strikes == 1)
+                {
+                    spriteBatch.Draw(redX_on, new Vector2(520, 220), Color.White);
+                    spriteBatch.Draw(redX_on, new Vector2(575, 220), Color.White);
+                    spriteBatch.Draw(redX_off, new Vector2(630, 220), Color.White);
+                }
+
                 //display string "MACHO POINTS"
                 spriteBatch.DrawString(textFont, "MACHO POINTS", score_position + new Vector2(-100, 295), Color.White);
 
                 //display the points
                 spriteBatch.DrawString(ScoreFont, Convert.ToInt32(score_total).ToString(), score_position + new Vector2(-130, 340), Color.White);
+                if(light_state == 0)
+                {
+                    spriteBatch.Draw(light_1, main_body_position, Color.White);
+                    spriteBatch.Draw(light_2, main_body_position, Color.White);
+                    spriteBatch.Draw(light_3, main_body_position, Color.White);
+                    spriteBatch.Draw(light_4, main_body_position, Color.White);
+                    
+                }
+                else if (light_state == 1)
+                {
+                    spriteBatch.Draw(light_1_1, main_body_position, Color.White);
+                    spriteBatch.Draw(light_2_1, main_body_position, Color.White);
+                    spriteBatch.Draw(light_3_1, main_body_position, Color.White);
+                    spriteBatch.Draw(light_4_1, main_body_position, Color.White);
+
+                }
+                else if (light_state == 2)
+                {
+                    spriteBatch.Draw(light_1_2, main_body_position, Color.White);
+                    spriteBatch.Draw(light_2_2, main_body_position, Color.White);
+                    spriteBatch.Draw(light_3_2, main_body_position, Color.White);
+                    spriteBatch.Draw(light_4_2, main_body_position, Color.White);
+                }
+                else if (light_state == 3)
+                {
+                    spriteBatch.Draw(light_1_3, main_body_position, Color.White);
+                    spriteBatch.Draw(light_2_3, main_body_position, Color.White);
+                    spriteBatch.Draw(light_3_3, main_body_position, Color.White);
+                    spriteBatch.Draw(light_4_3, main_body_position, Color.White);
+                }
+
+                Sparkle();
 
                 spriteBatch.Draw(card_clock, main_body_position, Color.White);
                 spriteBatch.Draw(clock_hand, main_body_position + new Vector2(363, 62), null, Color.White, clock_rotation, new Vector2(5, 5), 1, SpriteEffects.None, 0);
@@ -548,7 +699,9 @@ namespace ArmStrong
             else if (game_state == 3)
             {
                 spriteBatch.Draw(gameover, Vector2.Zero, Color.White);
+                spriteBatch.DrawString(ScoreFont, Convert.ToInt32(score_total).ToString(), new Vector2(450, 195), Color.White);
             }
+
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -572,17 +725,22 @@ namespace ArmStrong
 
 
 
-        public void Reset_Card()
+        public void Reset_Card(bool result)
         {
-            level++;
-            remaining_time = timer_length;
+            
             shoulder_L_rotation = (float)rnd_L.NextDouble() * Pi;
             shoulder_R_rotation = (float)rnd_R.NextDouble() * Pi;
             flex = false;
-           
+            
+            if(result == true)
+            {
+                cheering.Play();
+                level++;
+            }
+            
+
             if (card_state == 5)
             {
-                level = 1;
                 card_state = 1;
             }
             else
@@ -594,52 +752,66 @@ namespace ArmStrong
             {
                 game_state = 3;
             }
-
+            
+            remaining_time = timer_length;
         }
 
         public void Judgement()
         {
+            if(flex == true)
+            {
+                if (Math.Cos(shoulder_L_rotation) < 0 && Math.Cos(elbow_L_rotation) < 0)
+                {
+                    judgement_L = 0;
+                }
+                else if (Math.Cos(shoulder_L_rotation) < 0 && Math.Cos(elbow_L_rotation) > 0)
+                {
+                    judgement_L = (float) Math.Cos(elbow_L_rotation);
+                }
+                else if (Math.Cos(shoulder_L_rotation) > 0 && Math.Cos(elbow_L_rotation) < 0)
+                {
+                    judgement_L = (float) Math.Cos(shoulder_L_rotation);
+                }
+                else if (Math.Cos(shoulder_L_rotation) > 0 && Math.Cos(elbow_L_rotation) > 0)
+                {
+                    judgement_L = (float) Math.Cos(shoulder_L_rotation) + (float) Math.Cos(elbow_L_rotation);
+                }
+                else
+                {
 
-            if (Math.Cos(shoulder_L_rotation) < 0 && Math.Cos(elbow_L_rotation) < 0)
-            {
-                judgement_L = 0;
-            }
-            else if (Math.Cos(shoulder_L_rotation) < 0 && Math.Cos(elbow_L_rotation) > 0)
-            {
-                judgement_L = (float) Math.Cos(elbow_L_rotation);
-            }
-            else if (Math.Cos(shoulder_L_rotation) > 0 && Math.Cos(elbow_L_rotation) < 0)
-            {
-                judgement_L = (float) Math.Cos(shoulder_L_rotation);
-            }
-            else if (Math.Cos(shoulder_L_rotation) > 0 && Math.Cos(elbow_L_rotation) > 0)
-            {
-                judgement_L = (float) Math.Cos(shoulder_L_rotation) + (float) Math.Cos(elbow_L_rotation);
+                }
+
+                if (judgement_L > 1.5)
+                {
+                    judge_state = 3;
+                }
+                else if (judgement_L < 1.5 && judgement_L > 0.5)
+                {
+                    judge_state = 2;
+                }
+                else if (judgement_L < 0.5 && judgement_L > 0) 
+                {
+                    judge_state = 1;
+                }
+                else if(judgement_L == 0)
+                {
+                    judge_state = 0;
+                }
+                else
+                {
+
+                }
             }
             else
             {
-
-            }
-
-            if (judgement_L > 1.5)
-            {
-                judge_state = 3;
-            }
-            else if (judgement_L < 1.5 && judgement_L > 0.5)
-            {
-                judge_state = 2;
-            }
-            else if (judgement_L < 0.5 && judgement_L > 0) 
-            {
-                judge_state = 1;
-            }
-            else if(judgement_L == 0)
-            {
-                judge_state = 0;
-            }
-            else
-            {
-
+                judge_state = 4;
+                if(remaining_time == 15)
+                {
+                    remaining_strikes--;
+                    strike_buffer = 15;
+                    sound_failure.Play();
+                    Reset_Card(false);
+                }
             }
 
         }
@@ -671,7 +843,32 @@ namespace ArmStrong
 
             }
 
+
         }
 
+        public void Sparkle()
+        {
+            if (light_state == 1)
+            {
+                if (level > 7)
+                {
+                    spriteBatch.Draw(sparkle1, new Vector2(rnd_sparkle.Next(140, 275), rnd_sparkle.Next(125, 320)), Color.White);
+                }
+            }
+            if (light_state == 2)
+            {
+                if (level > 7)
+                {
+                    spriteBatch.Draw(sparkle2, new Vector2(rnd_sparkle.Next(140, 275), rnd_sparkle.Next(125, 320)), Color.White);
+                }
+            }
+            if (light_state == 3)
+            {
+                if (level > 7)
+                {
+                    spriteBatch.Draw(sparkle3, new Vector2(rnd_sparkle.Next(140, 275), rnd_sparkle.Next(125, 320)), Color.White);
+                }
+            }
+        }
     }
 }
